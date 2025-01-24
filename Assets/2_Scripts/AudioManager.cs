@@ -11,8 +11,6 @@ public class AudioManager : MonoBehaviour
 
     public static AudioManager instance;
     public MysteriousTickingNoise myTickNoise;
-    public TypeSoundGenerator myTypeSound;
-    public TextEnterSoundGenerator myTextEnter;
 
     // Start is called before the first frame update
     void Awake()
@@ -31,8 +29,6 @@ public class AudioManager : MonoBehaviour
 
 
         myTickNoise = FindObjectOfType<MysteriousTickingNoise>();
-        myTypeSound = FindObjectOfType<TypeSoundGenerator>();
-        myTextEnter = FindObjectOfType<TextEnterSoundGenerator>();
         foreach (var item in sounds)
         {
             item.mySource = gameObject.AddComponent<AudioSource>();
