@@ -1,12 +1,11 @@
+using System;
+using GGJ_Cowboys;
 using NaughtyAttributes;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Bottle : MonoBehaviour
 {
-    private GameManager myGameManager;
-
-
-
     [Header("Bottle Preasure")]
     [MinMaxSlider(0.0f, 100.0f)]
     public Vector2 maxPreasureRange;
@@ -34,8 +33,8 @@ public class Bottle : MonoBehaviour
     [HorizontalLine(color: EColor.Blue)]
     [Header("Throwing")]
     [SerializeField] float flyingTime;
-    [SerializeField] Transform position1;
-    [SerializeField] Transform position2;
+    [SerializeField] public Transform position1;
+    [SerializeField] public Transform position2;
     [SerializeField] AnimationCurve yOffsetCurve;
     [SerializeField] float hightMultiplyer = 1;
     [SerializeField] float SpeedCurveMultiplyer = 2;
@@ -44,21 +43,43 @@ public class Bottle : MonoBehaviour
     private float flyTimer;
     private Vector3 currentStartPosition;
     private Vector3 currentTargetPosition;
-
-    private void Awake()
-    {
-        myGameManager = FindAnyObjectByType<GameManager>();
-    }
+    
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        GameManager.Instance.Bottle = this;
+    }
+
+    public void SetStartPosition()
+    {
+        transform.position = position1.position;
         ResetBottle();
+        GameManager.Instance.Cowboy1.OnShake += OnShake;
+        GameManager.Instance.Cowboy2.OnShake += OnShake;
+    }
+
+    private void OnShake(Shake shakeStrength)
+    {
+        switch (shakeStrength)
+        {
+            case Shake.Small:
+                //do stuff
+                TryIncreasePreasurebyValue(1);
+                break;
+            case Shake.Medium:
+                break;
+            case Shake.Big:
+                break;
+            default:
+            case Shake.Rest:
+                throw new ArgumentOutOfRangeException(nameof(shakeStrength), shakeStrength, null);
+        }
     }
 
     private void Update()
     {
-        if (myGameManager.Flying) { UpdateBottleFlyPosition(); }
+        if (GameManager.Instance.Flying) { UpdateBottleFlyPosition(); }
     }
 
     private void ResetBottle()
@@ -142,7 +163,7 @@ public class Bottle : MonoBehaviour
             Debug.LogWarning("ThrowCowboy hat die falsche ID!!!");
         }
 
-        myGameManager.Flying = true;
+        GameManager.Instance.Flying = true;
     }
 
     void UpdateBottleFlyPosition()
@@ -151,8 +172,8 @@ public class Bottle : MonoBehaviour
 
         // Werte aus der yOffsetCurve abrufen
         float yValue = yOffsetCurve.Evaluate(flyProgress);
-        float yValueNext = yOffsetCurve.Evaluate(flyProgress + 0.01f); // Kleiner Schritt für Steigung
-        float yCurveSlope = Mathf.Abs((yValueNext - yValue) / 0.01f); // Änderungsrate (Steigung)
+        float yValueNext = yOffsetCurve.Evaluate(flyProgress + 0.01f); // Kleiner Schritt fï¿½r Steigung
+        float yCurveSlope = Mathf.Abs((yValueNext - yValue) / 0.01f); // ï¿½nderungsrate (Steigung)
 
         // Geschwindigkeit basierend auf der Steigung anpassen
         float adjustedFlySpeed = Mathf.Lerp(1f, SpeedCurveMultiplyer, yCurveSlope); // Anpassen des Speed-Faktors (Skalierung nach Bedarf)
@@ -167,10 +188,10 @@ public class Bottle : MonoBehaviour
 
         if (flyTimer >= flyingTime)
         {
-            myGameManager.Flying = false;
+            GameManager.Instance.Flying = false;
             flyTimer = 0;
-
             transform.position = currentTargetPosition;
+            GameManager.Instance.ReportBottleLanded();
         }
     }
     #endregion
@@ -182,9 +203,17 @@ public class Bottle : MonoBehaviour
         Debug.Log("Bottle exploaded by Preasure Value of " + preasureMaxLimit + ".");
 
         //melde dem Gamemanager dass explosion passiert is
-
-
+        GameManager.Instance.CurrentGameState = GameManager.GameState.PostGame;
+        
+        Destroy(gameObject);
     }
 
     #endregion
+
+    private void OnDestroy()
+    {
+        GameManager.Instance.Cowboy1.OnShake -= OnShake;
+        GameManager.Instance.Cowboy2.OnShake -= OnShake;
+        GameManager.Instance.Bottle = null;
+    }
 }

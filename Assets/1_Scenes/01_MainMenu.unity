@@ -286,6 +286,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startState: 0
   currentGameState: 0
+  Cowboy1: {fileID: 0}
+  Cowboy2: {fileID: 0}
   activeCowboy: 0
 --- !u!4 &86247683
 Transform:
