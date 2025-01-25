@@ -331,6 +331,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8672b3d6fc208f44aae2f99d940d5efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GameSceneName: 02_MainLevel
   DefaultSelectedMenuButton: {fileID: 2146178320}
 --- !u!4 &320903973
 Transform:
@@ -575,7 +576,7 @@ GameObject:
   - component: {fileID: 884260711}
   - component: {fileID: 884260710}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: MenuCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -748,7 +749,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1387759302}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 320903972}
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
+        m_MethodName: QuitGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1387759302
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1263,7 +1276,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2146178323}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 320903972}
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
+        m_MethodName: LoadGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2146178323
 MonoBehaviour:
   m_ObjectHideFlags: 0
