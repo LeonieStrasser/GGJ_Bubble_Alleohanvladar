@@ -32,6 +32,7 @@ public class Bottle : MonoBehaviour
     [SerializeField] BottleFeedbackTrigger[] feedbackMarker;
     [SerializeField] VisualEffect bubbleEffect1;
     [SerializeField] VisualEffect bubbleEffect2;
+    [SerializeField] VisualEffect explosionVFX;
 
     [HorizontalLine(color: EColor.Blue)]
     [Header("Throwing")]
