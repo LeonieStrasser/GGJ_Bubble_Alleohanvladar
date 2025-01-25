@@ -8,8 +8,11 @@ public class Bottle : MonoBehaviour
 
 
     [Header("Bottle Preasure")]
+    [MinMaxSlider(0.0f, 100.0f)]
+    public Vector2 maxPreasureRange;
+    [SerializeField, ReadOnly, BoxGroup("Debug")] private float preasureMaxLimit;
     [SerializeField] float preasureIncreaseSpeedMultiplyer = .5f;
-    private float bottlePreasure;
+    [SerializeField, ReadOnly, BoxGroup("Debug")] private float bottlePreasure;
     float BottlePreasure
     {
         get { return bottlePreasure; }
@@ -21,6 +24,8 @@ public class Bottle : MonoBehaviour
 
 
     }
+    [SerializeField, ReadOnly, BoxGroup("Debug")] bool BottleExploded = false;
+
 
     [HorizontalLine(color: EColor.Blue)]
     [Header("Preasure Feedback")]
@@ -31,10 +36,11 @@ public class Bottle : MonoBehaviour
     [SerializeField] float flyingTime;
     [SerializeField] Transform position1;
     [SerializeField] Transform position2;
-    [SerializeField] AnimationCurve flyingSpeedCurve;
     [SerializeField] AnimationCurve yOffsetCurve;
+    [SerializeField] float hightMultiplyer = 1;
+    [SerializeField] float SpeedCurveMultiplyer = 2;
 
-    
+
     private float flyTimer;
     private Vector3 currentStartPosition;
     private Vector3 currentTargetPosition;
@@ -47,10 +53,7 @@ public class Bottle : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        foreach (var feedbackMarker in feedbackMarker)
-        {
-            feedbackMarker.SetTriggerTime();
-        }
+        ResetBottle();
     }
 
     private void Update()
@@ -58,41 +61,62 @@ public class Bottle : MonoBehaviour
         if (myGameManager.Flying) { UpdateBottleFlyPosition(); }
     }
 
-    #region preasure
-    private void OnPreasureChange(float currentPreasue)
-    {
-        foreach (var feedbackMarker in feedbackMarker)
-        {
-            if (!feedbackMarker.triggered && feedbackMarker.triggerTime >= bottlePreasure)
-            {
-                feedbackMarker.feedbackEvent.Invoke();
-
-                feedbackMarker.triggered = true;
-            }
-        }
-
-    }
-
     private void ResetBottle()
     {
-        BottlePreasure = 0;
+        preasureMaxLimit = Random.Range(maxPreasureRange.x, maxPreasureRange.y);
         foreach (var feedbackMarker in feedbackMarker)
         {
             feedbackMarker.SetTriggerTime();
             feedbackMarker.triggered = false;
         }
+        BottlePreasure = 0; // muss hier am ende stehen!!!
     }
-
-
-    public void IncreasePreasurebyValue(int increaseValue)
+    #region preasure
+    private void OnPreasureChange(float currentPreasue)
     {
-        BottlePreasure = Mathf.Clamp(BottlePreasure + increaseValue * preasureIncreaseSpeedMultiplyer, 0, 100);
+        foreach (var feedbackMarker in feedbackMarker)
+        {
+            if (!feedbackMarker.triggered && currentPreasue >= feedbackMarker.triggerTime)
+            {
+                feedbackMarker.feedbackEvent.Invoke();
+
+                feedbackMarker.triggered = true;
+
+                Debug.Log("Bottle FEEDBACK was triggered at Preasure Value " + feedbackMarker.triggerTime);
+            }
+        }
+
     }
 
+
+
+    public bool TryIncreasePreasurebyValue(int increaseValue)
+    {
+        if (!BottleExploded)
+        {
+            BottlePreasure = Mathf.Clamp(BottlePreasure + increaseValue * preasureIncreaseSpeedMultiplyer, 0, 100);
+
+
+            // Bottle exploading
+            if (bottlePreasure >= preasureMaxLimit)
+            {
+                BottleExploding();
+                BottleExploded = true;
+            }
+            return true;
+        }else {return false; }
+    }
+
+    [Button]
+    public void DebugIncreasePreasure()
+    {
+        TryIncreasePreasurebyValue(5);
+    }
 
 
     #endregion
 
+    #region fly
     // FLIIIIEGEN!!!!
 
     [Button]
@@ -124,11 +148,20 @@ public class Bottle : MonoBehaviour
     void UpdateBottleFlyPosition()
     {
         float flyProgress = flyTimer / flyingTime;
-        float value = flyingSpeedCurve.Evaluate(flyProgress);
-        Vector3 lerpedPosition = Vector3.Lerp(currentStartPosition, currentTargetPosition, value); // + new Vector3(0, yOffsetCurve.Evaluate(flyProgress), 0);
+
+        // Werte aus der yOffsetCurve abrufen
+        float yValue = yOffsetCurve.Evaluate(flyProgress);
+        float yValueNext = yOffsetCurve.Evaluate(flyProgress + 0.01f); // Kleiner Schritt für Steigung
+        float yCurveSlope = Mathf.Abs((yValueNext - yValue) / 0.01f); // Änderungsrate (Steigung)
+
+        // Geschwindigkeit basierend auf der Steigung anpassen
+        float adjustedFlySpeed = Mathf.Lerp(1f, SpeedCurveMultiplyer, yCurveSlope); // Anpassen des Speed-Faktors (Skalierung nach Bedarf)
+
+
+        Vector3 lerpedPosition = Vector3.Lerp(currentStartPosition, currentTargetPosition, flyProgress) + new Vector3(0, yOffsetCurve.Evaluate(flyProgress) * hightMultiplyer, 0);
         transform.position = lerpedPosition;
 
-        flyTimer += Time.deltaTime;
+        flyTimer += Time.deltaTime * adjustedFlySpeed;
 
         // if throw finished
 
@@ -140,5 +173,18 @@ public class Bottle : MonoBehaviour
             transform.position = currentTargetPosition;
         }
     }
+    #endregion
 
+    #region exploding
+
+    private void BottleExploding()
+    {
+        Debug.Log("Bottle exploaded by Preasure Value of " + preasureMaxLimit + ".");
+
+        //melde dem Gamemanager dass explosion passiert is
+
+
+    }
+
+    #endregion
 }
