@@ -23,7 +23,6 @@ public class MenuManager : MonoBehaviour
         Debug.Log("Started load scene with delay.");
         yield return new WaitForSeconds(0.5f);
         SceneManager.LoadScene(GameSceneName, LoadSceneMode.Single);
-        GameManager.Instance.CurrentGameState = GameManager.GameState.PreGame;
         Debug.Log("Scene loaded.");
     }
 

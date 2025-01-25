@@ -8,7 +8,7 @@ namespace GGJ_Cowboys
         Cowboy1,
         Cowboy2
     }
-    public enum ShakeState
+    public enum Shake
     {
         Rest = 0,
         Small = 1,
