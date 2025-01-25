@@ -155,10 +155,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 191c104139ac37448b8bb60ea2549ace, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxPreasureRange: {x: 11.643833, y: 100}
+  preasureMaxLimit: 0
   preasureIncreaseSpeedMultiplyer: 0.5
+  bottlePreasure: 0
+  BottleExploded: 0
   feedbackMarker:
   - triggerTime: 0
-    triggerRange: {x: 0, y: 0}
+    triggerRange: {x: 16.723679, y: 57.01255}
     triggered: 0
     feedbackEvent:
       m_PersistentCalls:
@@ -176,26 +180,97 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
   - triggerTime: 0
-    triggerRange: {x: 0, y: 0}
+    triggerRange: {x: 50.589134, y: 76.4348}
     triggered: 0
     feedbackEvent:
       m_PersistentCalls:
-        m_Calls: []
-  flyingTime: 0
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: 
+          m_MethodName: 
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: 
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - triggerTime: 0
+    triggerRange: {x: 23.257946, y: 49.103615}
+    triggered: 0
+    feedbackEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: 
+          m_MethodName: 
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: 
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - triggerTime: 0
+    triggerRange: {x: 23.257946, y: 81.25795}
+    triggered: 0
+    feedbackEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: 
+          m_MethodName: 
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: 
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  flyingTime: 1
   position1: {fileID: 0}
   position2: {fileID: 0}
-  flyingSpeedCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
   yOffsetCurve:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.08673096
+      inSlope: 2.5069366
+      outSlope: 2.5069366
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.06736831
+    - serializedVersion: 3
+      time: 0.71536255
+      value: 0.9952812
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0.0023498535
+      inSlope: -5.369689
+      outSlope: -5.369689
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.042168617
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  hightMultiplyer: 2
+  SpeedCurveMultiplyer: 2
 --- !u!1 &4252379327085755678
 GameObject:
   m_ObjectHideFlags: 0
