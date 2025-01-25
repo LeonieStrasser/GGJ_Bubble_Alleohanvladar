@@ -253,6 +253,7 @@ public class Bottle : MonoBehaviour
         GameManager.Instance.CurrentGameState = GameManager.GameState.PostGame;
 
         GameObject newExplosion = Instantiate(explosionVFX.gameObject, explosionVFX.gameObject.transform.position, this.transform.rotation);
+        newExplosion.GetComponent<VisualEffect>().Play();
         Destroy(newExplosion, 2);
         Destroy(gameObject);
     }

@@ -122,9 +122,18 @@ public class GameManager : MonoBehaviour
                 Cowboy2 = askingCowboy;
                 break;
         }
-        
-        if(Cowboy1 && Cowboy2)
+
+        if (Cowboy1 && Cowboy2)
+        {
+            //making sure the cowboys are right on start.
+            Cowboy1.PlayerDude.SetActive(true);
+            Cowboy1.CowboyModel.SetActive(false);
+                
+            Cowboy2.PlayerDude.SetActive(false);
+            Cowboy2.CowboyModel.SetActive(true);
             SetUpBottle();
+        }
+            
     }
 
     private void SetUpBottle()
@@ -180,13 +189,6 @@ public class GameManager : MonoBehaviour
             
             case GameState.PreGame:
                 ActiveCowboy = Cowboy.None;
-                
-                //making sure the cowboys are right on start.
-                Cowboy1.PlayerDude.SetActive(true);
-                Cowboy1.CowboyModel.SetActive(false);
-                
-                Cowboy2.PlayerDude.SetActive(false);
-                Cowboy2.CowboyModel.SetActive(true);
                 
                 StartCoroutine(PreGamePlaceholder());
                 break;
