@@ -251,7 +251,9 @@ public class Bottle : MonoBehaviour
 
         //melde dem Gamemanager dass explosion passiert is
         GameManager.Instance.CurrentGameState = GameManager.GameState.PostGame;
-        
+
+        GameObject newExplosion = Instantiate(explosionVFX.gameObject, explosionVFX.gameObject.transform.position, this.transform.rotation);
+        Destroy(newExplosion, 2);
         Destroy(gameObject);
     }
 
