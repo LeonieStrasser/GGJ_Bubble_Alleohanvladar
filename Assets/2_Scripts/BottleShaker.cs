@@ -34,19 +34,20 @@ public class BottleShaker : MonoBehaviour
         MediumShake = 40,
         BigShake = 60;
 
-    private ShakeState 
+    private Shake 
         C1_CurrentShake,
         C1_lastBiggestShake,
         C2_CurrentShake,
         C2_lastBiggestShake;
 
-    public Action<Cowboy, ShakeState> ShakeEvent;
+    public Action<Cowboy, Shake> ShakeEvent;
     
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         Cowboy_1_Stick = InputSystem.actions.FindAction("Player/Cowboy_1_Stick");
+        Debug.Log(Cowboy_1_Stick);
         Cowboy_2_Stick = InputSystem.actions.FindAction("Player/Cowboy_2_Stick");
 
         for (int i = 0; i < VelocityChangeSmoothing; i++)
@@ -60,10 +61,10 @@ public class BottleShaker : MonoBehaviour
     {
         StickReadOut();
         //Debug.Log($"C1 {smoothedC1VelocityChanges}");
-        ShakeState c1Shake = EvaluateCurrentShake(smoothedC1VelocityChanges);
+        Shake c1Shake = EvaluateCurrentShake(smoothedC1VelocityChanges);
         RegisterShakes(c1Shake, ref C1_lastBiggestShake, Cowboy.Cowboy1);
         
-        ShakeState c2Shake = EvaluateCurrentShake(smoothedC2VelocityChanges);
+        Shake c2Shake = EvaluateCurrentShake(smoothedC2VelocityChanges);
         RegisterShakes(c2Shake, ref C1_lastBiggestShake, Cowboy.Cowboy2);
     }
 
@@ -104,44 +105,44 @@ public class BottleShaker : MonoBehaviour
         lastC2Value = Cowboy_2_Stick___Value;
     }
     
-    private ShakeState EvaluateCurrentShake(float smoothedVelChange)
+    private Shake EvaluateCurrentShake(float smoothedVelChange)
     {
         if (smoothedVelChange > BigShake)
-            return ShakeState.Big;
+            return Shake.Big;
         if (smoothedVelChange > MediumShake)
-            return ShakeState.Medium;
+            return Shake.Medium;
         if (smoothedVelChange > SmallShake)
-            return ShakeState.Small;
+            return Shake.Small;
         
-        return ShakeState.Rest;
+        return Shake.Rest;
     }
 
-    private void RegisterShakes(ShakeState currentShake, ref ShakeState highestShake, Cowboy cowboy)
+    private void RegisterShakes(Shake currentShake, ref Shake highestShake, Cowboy cowboy)
     {
         switch (currentShake)
         {
-            case ShakeState.Small:
-                if (highestShake < ShakeState.Small)
-                    highestShake = ShakeState.Small;
+            case Shake.Small:
+                if (highestShake < Shake.Small)
+                    highestShake = Shake.Small;
                 break;
             
-            case ShakeState.Medium:
-                if (highestShake < ShakeState.Medium)
-                    highestShake = ShakeState.Medium;
+            case Shake.Medium:
+                if (highestShake < Shake.Medium)
+                    highestShake = Shake.Medium;
                 break;
             
-            case ShakeState.Big:
-                if (highestShake < ShakeState.Big)
-                    highestShake = ShakeState.Big;
+            case Shake.Big:
+                if (highestShake < Shake.Big)
+                    highestShake = Shake.Big;
                 break;
             
             default:
-            case ShakeState.Rest:
-                if (highestShake > ShakeState.Rest)
+            case Shake.Rest:
+                if (highestShake > Shake.Rest)
                 {
                     Debug.Log($"SHAKE REGISTERED: {highestShake}");
                     ShakeEvent?.Invoke(cowboy, highestShake);
-                    highestShake = ShakeState.Rest;
+                    highestShake = Shake.Rest;
                 }
                 break;
         }
