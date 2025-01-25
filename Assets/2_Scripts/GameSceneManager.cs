@@ -20,8 +20,6 @@ public class GameSceneManager : MonoBehaviour
     {
         //When this scene starts, move to preGame
         GameManager.Instance.CurrentGameState = GameManager.GameState.PreGame;
-        
-        
-        
+        CameraManager.Instance.LookAtPlayer1();
     }
 }
