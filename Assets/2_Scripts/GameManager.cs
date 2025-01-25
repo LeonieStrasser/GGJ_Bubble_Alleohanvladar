@@ -39,8 +39,9 @@ public class GameManager : MonoBehaviour
         Cowboy1, 
         Cowboy2;
 
-    public GameObject BottlePrefab;
     
+    
+    public GameObject BottlePrefab;
     private Bottle _bottle;
     public Bottle Bottle
     {
@@ -71,10 +72,14 @@ public class GameManager : MonoBehaviour
     public bool Flying
     {
         get { return flying; }
-        set { flying = value; }
+        set
+        {
+            flying = value; 
+            if(flying)
+                CameraManager.Instance.LookAtBottle();
+        }
     }
-
-
+    
     //######################################################################################
     //#######################   Awake, Start and other set-up stuff  #######################
     //######################################################################################
@@ -124,6 +129,7 @@ public class GameManager : MonoBehaviour
 
     private void SetUpBottle()
     {
+        Debug.Log("Spawn bottle");
         GameObject bottleObj = Instantiate(BottlePrefab);
         Bottle = bottleObj.GetComponent<Bottle>();
         Bottle.position1 = Cowboy1.HandPoint;
@@ -174,6 +180,14 @@ public class GameManager : MonoBehaviour
             
             case GameState.PreGame:
                 ActiveCowboy = Cowboy.None;
+                
+                //making sure the cowboys are right on start.
+                Cowboy1.PlayerDude.SetActive(true);
+                Cowboy1.CowboyModel.SetActive(false);
+                
+                Cowboy2.PlayerDude.SetActive(false);
+                Cowboy2.CowboyModel.SetActive(true);
+                
                 StartCoroutine(PreGamePlaceholder());
                 break;
             
@@ -231,12 +245,14 @@ public class GameManager : MonoBehaviour
                 Debug.Log("Set Turn - Cowboy 1");
                 Cowboy1.PlayState = CowboyState.Shaking;
                 Cowboy2.PlayState = CowboyState.Moving;
+                CameraManager.Instance.LookAtPlayer1();
                 break;
             
             case Cowboy.Cowboy2:
                 Debug.Log("Set Turn - Cowboy 2");
                 Cowboy1.PlayState = CowboyState.Moving;
                 Cowboy2.PlayState = CowboyState.Shaking;
+                CameraManager.Instance.LookAtPlayer2();
                 break;
         }
     }
@@ -256,7 +272,6 @@ public class GameManager : MonoBehaviour
                 ActiveCowboy = Cowboy.Cowboy1;
                 break;
         }
-        
     }
     
     

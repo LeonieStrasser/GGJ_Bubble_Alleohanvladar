@@ -2,6 +2,7 @@ using System;
 using GGJ_Cowboys;
 using NaughtyAttributes;
 using UnityEngine;
+using UnityEngine.VFX;
 using Random = UnityEngine.Random;
 
 public class Bottle : MonoBehaviour
@@ -20,8 +21,6 @@ public class Bottle : MonoBehaviour
             OnPreasureChange(value);
             bottlePreasure = value;
         }
-
-
     }
     [SerializeField, ReadOnly, BoxGroup("Debug")] bool BottleExploded = false;
 
@@ -29,6 +28,9 @@ public class Bottle : MonoBehaviour
     [HorizontalLine(color: EColor.Blue)]
     [Header("Preasure Feedback")]
     [SerializeField] BottleFeedbackTrigger[] feedbackMarker;
+    [SerializeField] VisualEffect bubbleEffect1;
+    [SerializeField] VisualEffect bubbleEffect2;
+    [SerializeField] VisualEffect explosionVFX;
 
     [HorizontalLine(color: EColor.Blue)]
     [Header("Throwing")]
@@ -43,17 +45,35 @@ public class Bottle : MonoBehaviour
     private float flyTimer;
     private Vector3 currentStartPosition;
     private Vector3 currentTargetPosition;
-    
 
+    
+    public Camera
+        bottleCam_P1_to_P2;
+
+
+    public void ActivateBottleCam()
+    {
+        bottleCam_P1_to_P2.gameObject.SetActive(true);
+    }
+    
+    public void DeactivateBottleCam()
+    {
+        bottleCam_P1_to_P2.gameObject.SetActive(false);
+    }
+    
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         GameManager.Instance.Bottle = this;
+        DeactivateBottleCam();
     }
+    
 
     public void SetStartPosition()
     {
         transform.position = position1.position;
+        transform.rotation = position1.rotation;
         ResetBottle();
         GameManager.Instance.Cowboy1.OnShake += OnShake;
         GameManager.Instance.Cowboy2.OnShake += OnShake;
@@ -79,7 +99,26 @@ public class Bottle : MonoBehaviour
 
     private void Update()
     {
-        if (GameManager.Instance.Flying) { UpdateBottleFlyPosition(); }
+        if(BottleExploded) return;
+        if (GameManager.Instance.Flying)
+        {
+            UpdateBottleFlyPosition();
+        }
+        else
+        {
+            if (GameManager.Instance.ActiveCowboy == Cowboy.Cowboy1)
+            {
+                transform.position = position1.position;
+                transform.rotation = position1.rotation;
+            }
+            else
+            {
+                transform.position = position2.position;
+                transform.rotation = position2.rotation;
+            }
+        }
+
+        UpdateBubbleVFX();
     }
 
     private void ResetBottle()
@@ -134,6 +173,12 @@ public class Bottle : MonoBehaviour
         TryIncreasePreasurebyValue(5);
     }
 
+    void UpdateBubbleVFX()
+    {
+        bubbleEffect1.SetFloat("Intensity", BottlePreasure/100);
+        bubbleEffect2.SetFloat("Intensity", BottlePreasure/100);
+    }
+
 
     #endregion
 
@@ -162,6 +207,8 @@ public class Bottle : MonoBehaviour
         {
             Debug.LogWarning("ThrowCowboy hat die falsche ID!!!");
         }
+        
+        transform.rotation = Quaternion.Euler(Vector3.zero);
 
         GameManager.Instance.Flying = true;
     }
@@ -204,7 +251,9 @@ public class Bottle : MonoBehaviour
 
         //melde dem Gamemanager dass explosion passiert is
         GameManager.Instance.CurrentGameState = GameManager.GameState.PostGame;
-        
+
+        GameObject newExplosion = Instantiate(explosionVFX.gameObject, explosionVFX.gameObject.transform.position, this.transform.rotation);
+        Destroy(newExplosion, 2);
         Destroy(gameObject);
     }
 

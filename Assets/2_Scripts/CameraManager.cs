@@ -1,3 +1,4 @@
+using System;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -6,9 +7,28 @@ public class CameraManager : MonoBehaviour
 {
     [SerializeField] private GameObject cameraPlayer1;
     [SerializeField] private GameObject cameraPlayer2;
-    [SerializeField] private GameObject cameraBottle;
+    [SerializeField] private Camera 
+        cameraBottle_P1_to_P2,
+        cameraBottle_P2_to_P1;
 
-    //I know its dirty af but I am exhausted
+    public static CameraManager Instance;
+
+    private void Awake()
+    {
+        if(!Instance)
+            Instance = this;
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    private void OnDestroy()
+    {
+        Instance = null;
+    }
+
+    /*//I know its dirty af but I am exhausted
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.C))
@@ -28,8 +48,7 @@ public class CameraManager : MonoBehaviour
             LookAtPlayer2();
             Debug.Log("I pressed V!");
         }
-
-    }
+    }*/
 
     //if a player ends their turn, other cameras are turned off and we look through the bottlecamera
     public void LookAtBottle()
@@ -37,7 +56,7 @@ public class CameraManager : MonoBehaviour
         Debug.Log("Switched to Bottle Camera");
         cameraPlayer1.SetActive(false);
         cameraPlayer2.SetActive(false);
-        cameraBottle.SetActive(true);
+        GameManager.Instance.Bottle.ActivateBottleCam();
     }
 
     public void LookAtPlayer1()
@@ -45,7 +64,7 @@ public class CameraManager : MonoBehaviour
         Debug.Log("Switched to Player 1 Camera");
         cameraPlayer1.SetActive(true);
         cameraPlayer2.SetActive(false);
-        cameraBottle.SetActive(false);
+        GameManager.Instance.Bottle.DeactivateBottleCam();
     }
 
     public void LookAtPlayer2()
@@ -53,7 +72,7 @@ public class CameraManager : MonoBehaviour
         Debug.Log("Switched to Player 2 Camera");
         cameraPlayer1.SetActive(false);
         cameraPlayer2.SetActive(true);
-        cameraBottle.SetActive(false);
+        GameManager.Instance.Bottle.DeactivateBottleCam();
     }
 
 
