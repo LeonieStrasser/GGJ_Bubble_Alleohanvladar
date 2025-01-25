@@ -380,7 +380,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2101172050939427817, guid: d211ec2eceb951f428e731c7fc7cbf7f, type: 3}
       propertyPath: feedbackMarker.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2101172050939427817, guid: d211ec2eceb951f428e731c7fc7cbf7f, type: 3}
       propertyPath: yOffsetCurve.m_Curve.Array.size
@@ -445,6 +445,14 @@ PrefabInstance:
     - target: {fileID: 2101172050939427817, guid: d211ec2eceb951f428e731c7fc7cbf7f, type: 3}
       propertyPath: feedbackMarker.Array.data[2].triggerRange.y
       value: 49.103615
+      objectReference: {fileID: 0}
+    - target: {fileID: 2101172050939427817, guid: d211ec2eceb951f428e731c7fc7cbf7f, type: 3}
+      propertyPath: feedbackMarker.Array.data[3].triggerRange.x
+      value: 23.257946
+      objectReference: {fileID: 0}
+    - target: {fileID: 2101172050939427817, guid: d211ec2eceb951f428e731c7fc7cbf7f, type: 3}
+      propertyPath: feedbackMarker.Array.data[3].triggerRange.y
+      value: 81.25795
       objectReference: {fileID: 0}
     - target: {fileID: 2101172050939427817, guid: d211ec2eceb951f428e731c7fc7cbf7f, type: 3}
       propertyPath: flyingSpeedCurve.m_Curve.Array.data[1].time
@@ -529,6 +537,42 @@ PrefabInstance:
     - target: {fileID: 2101172050939427817, guid: d211ec2eceb951f428e731c7fc7cbf7f, type: 3}
       propertyPath: flyingSpeedCurve.m_Curve.Array.data[2].tangentMode
       value: 34
+      objectReference: {fileID: 0}
+    - target: {fileID: 2101172050939427817, guid: d211ec2eceb951f428e731c7fc7cbf7f, type: 3}
+      propertyPath: feedbackMarker.Array.data[1].feedbackEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2101172050939427817, guid: d211ec2eceb951f428e731c7fc7cbf7f, type: 3}
+      propertyPath: feedbackMarker.Array.data[2].feedbackEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2101172050939427817, guid: d211ec2eceb951f428e731c7fc7cbf7f, type: 3}
+      propertyPath: feedbackMarker.Array.data[3].feedbackEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2101172050939427817, guid: d211ec2eceb951f428e731c7fc7cbf7f, type: 3}
+      propertyPath: feedbackMarker.Array.data[1].feedbackEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2101172050939427817, guid: d211ec2eceb951f428e731c7fc7cbf7f, type: 3}
+      propertyPath: feedbackMarker.Array.data[2].feedbackEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2101172050939427817, guid: d211ec2eceb951f428e731c7fc7cbf7f, type: 3}
+      propertyPath: feedbackMarker.Array.data[3].feedbackEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2101172050939427817, guid: d211ec2eceb951f428e731c7fc7cbf7f, type: 3}
+      propertyPath: feedbackMarker.Array.data[1].feedbackEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2101172050939427817, guid: d211ec2eceb951f428e731c7fc7cbf7f, type: 3}
+      propertyPath: feedbackMarker.Array.data[2].feedbackEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2101172050939427817, guid: d211ec2eceb951f428e731c7fc7cbf7f, type: 3}
+      propertyPath: feedbackMarker.Array.data[3].feedbackEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2633130979891860562, guid: d211ec2eceb951f428e731c7fc7cbf7f, type: 3}
       propertyPath: m_Name
