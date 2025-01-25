@@ -37,8 +37,14 @@ public class GameManager : MonoBehaviour
             activeCowboy = value;
         }
     }
+    private bool flying;
+    public bool Flying
+    {
+        get { return flying; }
+        set { flying = value; }
+    }
 
-    
+
     //######################################################################################
     //#################################   Awake & Start   ##################################
     //######################################################################################
