@@ -22,6 +22,17 @@ public class Bottle : MonoBehaviour
     [Header("Preasure Feedback")]
     [SerializeField] BottleFeedbackTrigger[] feedbackMarker;
 
+    [HorizontalLine(color: EColor.Blue)]
+    [Header("Throwing")]
+    [SerializeField] float flyingTime;
+    [SerializeField] Transform position1;
+    [SerializeField] Transform position2;
+    [SerializeField] AnimationCurve flyingSpeedCurve;
+
+    private bool flying;
+    private float flyTimer;
+    private Vector3 currentStartPosition;
+    private Vector3 currentTargetPosition;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -32,13 +43,17 @@ public class Bottle : MonoBehaviour
         }
     }
 
-    
+    private void Update()
+    {
+        if (flying) { UpdateBottleFlyPosition(); }
+    }
 
+    #region preasure
     private void OnPreasureChange(float currentPreasue)
     {
         foreach (var feedbackMarker in feedbackMarker)
         {
-            if(!feedbackMarker.triggered && feedbackMarker.triggerTime >= bottlePreasure)
+            if (!feedbackMarker.triggered && feedbackMarker.triggerTime >= bottlePreasure)
             {
                 feedbackMarker.feedbackEvent.Invoke();
 
@@ -51,13 +66,69 @@ public class Bottle : MonoBehaviour
     private void ResetBottle()
     {
         BottlePreasure = 0;
+        foreach (var feedbackMarker in feedbackMarker)
+        {
+            feedbackMarker.SetTriggerTime();
+            feedbackMarker.triggered = false;
+        }
     }
+
+
+    public void IncreasePreasurebyValue(int increaseValue)
+    {
+        BottlePreasure = Mathf.Clamp(BottlePreasure + increaseValue * preasureIncreaseSpeedMultiplyer, 0, 100);
+    }
+
+
+
+    #endregion
+
+    // FLIIIIEGEN!!!!
 
     [Button]
-    public void IncreasePreasurebyValue(int increaseValue = -1)
+    public void DebugThrow()
     {
-        BottlePreasure += increaseValue * preasureIncreaseSpeedMultiplyer;
+        ThrowBottle(1);
     }
 
+    public void ThrowBottle(int throwCowboyID) // cowboy 1 = 1 , cowboy 2 = 2
+    {
+        if (throwCowboyID == 1)
+        {
+            currentStartPosition = position1.position;
+            currentTargetPosition = position2.position;
+        }
+        else if (throwCowboyID == 2)
+        {
+            currentStartPosition = position2.position;
+            currentTargetPosition = position1.position;
+        }
+        else
+        {
+            Debug.LogWarning("ThrowCowboy hat die falsche ID!!!");
+        }
+
+        flying = true;
+    }
+
+    void UpdateBottleFlyPosition()
+    {
+        float flyProgress = flyTimer / flyingTime;
+        float value = flyingSpeedCurve.Evaluate(flyProgress);
+        Vector3 lerpedPosition = Vector3.Lerp(currentStartPosition, currentTargetPosition, value);
+        transform.position = lerpedPosition;
+
+        flyTimer += Time.deltaTime;
+
+        // if throw finished
+
+        if (flyTimer >= flyingTime)
+        {
+            flying = false;
+            flyTimer = 0;
+
+            transform.position = currentTargetPosition;
+        }
+    }
 
 }
