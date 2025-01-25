@@ -103,12 +103,40 @@ public class CowboyController : MonoBehaviour
     
     private void TossBottle(InputAction.CallbackContext obj)
     {
-        Debug.Log($"{name} started Toss.");
+        //throwing only possible when bottle is also shakable i.e. in hand.
+        if(PlayState != CowboyState.Shaking) return;
+        
+        switch (player)
+        {
+            case Cowboy.None:
+                break;
+            case Cowboy.Cowboy1:
+                GameManager.Instance.Bottle.ThrowBottle(1);
+                break;
+            case Cowboy.Cowboy2:
+                GameManager.Instance.Bottle.ThrowBottle(2);
+                break;
+        }
+        
+        //enter idle after throw. will be set to moving, once the bottle reached other cowboy.
+        PlayState = CowboyState.Idle;
+
     }
 
     private void OnDestroy()
     {
         Toss.performed -= TossBottle;
+        
+        //assign self to Game manager slot and get relevant analog stick
+        switch (player)
+        {
+            case Cowboy.Cowboy1:
+                GameManager.Instance.Cowboy1 = null;
+                break;
+            case Cowboy.Cowboy2:
+                GameManager.Instance.Cowboy2 = null;
+                break;
+        }
     }
 }
 

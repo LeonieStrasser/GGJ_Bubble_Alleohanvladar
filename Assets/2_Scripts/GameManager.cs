@@ -4,6 +4,7 @@ using GGJ_Cowboys;
 using UnityEngine;
 using NaughtyAttributes;
 using Unity.VisualScripting;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 
 
@@ -37,6 +38,21 @@ public class GameManager : MonoBehaviour
     public CowboyController 
         Cowboy1, 
         Cowboy2;
+
+    private Bottle _bottle;
+
+    public Bottle Bottle
+    {
+        get => _bottle;
+        set
+        {
+            _bottle = value;
+            
+            //if a bottle is slotted in
+            if(_bottle)
+                _bottle.SetStartPosition();
+        }
+    }
     
     
     [SerializeField, ReadOnly, BoxGroup("GameInfo")]
@@ -129,6 +145,9 @@ public class GameManager : MonoBehaviour
         {
             case GameState.Menu:
                 ActiveCowboy = Cowboy.None;
+                Bottle = null;
+                Cowboy1 = null;
+                Cowboy2 = null;
                 break;
             
             case GameState.PreGame:
@@ -139,7 +158,9 @@ public class GameManager : MonoBehaviour
             case GameState.InGame:
                 //when going from pre game to game, start round
                 if (oldState == GameState.PreGame)
+                {
                     StartGame();
+                }
                 break;
             
             case GameState.Paused:
@@ -148,6 +169,7 @@ public class GameManager : MonoBehaviour
             
             case GameState.PostGame:
                 ActiveCowboy = Cowboy.None;
+                StartCoroutine(PostGamePlaceholder());
                 break;
         }
     }
@@ -162,8 +184,15 @@ public class GameManager : MonoBehaviour
     private IEnumerator PreGamePlaceholder()
     {
         Debug.Log("Started pre game. here is space for animations and effects.");
-        yield return new WaitForSeconds(6);
+        yield return new WaitForSeconds(3);
         Instance.CurrentGameState = GameState.InGame;
+    }
+    
+    private IEnumerator PostGamePlaceholder()
+    {
+        Debug.Log("Entered post game. here is space for animations and effects.");
+        yield return new WaitForSeconds(3);
+        SceneManager.LoadScene("01_MainMenu");
     }
 
     private void StartCowboyTurn(Cowboy newActiveCowboy)
@@ -188,6 +217,24 @@ public class GameManager : MonoBehaviour
                 Cowboy2.PlayState = CowboyState.Shaking;
                 break;
         }
+    }
+
+    public void ReportBottleLanded()
+    {
+        switch (ActiveCowboy)
+        {
+            default:
+            case Cowboy.None:
+                Debug.LogError("Bottle landed while no cowboy was active. broken shit.");
+                break;
+            case Cowboy.Cowboy1:
+                ActiveCowboy = Cowboy.Cowboy2;
+                break;
+            case Cowboy.Cowboy2:
+                ActiveCowboy = Cowboy.Cowboy1;
+                break;
+        }
+        
     }
     
     

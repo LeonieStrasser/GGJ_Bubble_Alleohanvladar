@@ -11,6 +11,7 @@ public class MenuManager : MonoBehaviour
     void Start()
     {
         EventSystem.current.SetSelectedGameObject(DefaultSelectedMenuButton);
+        GameManager.Instance.CurrentGameState = GameManager.GameState.Menu;
     }
 
     public void LoadGame()

@@ -119,7 +119,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3883962335652903696}
-  - component: {fileID: 3615242927433761283}
+  - component: {fileID: 7435993309328319540}
   m_Layer: 0
   m_Name: CowboyBase
   m_TagString: Untagged
@@ -144,7 +144,7 @@ Transform:
   - {fileID: 7396826510153483815}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3615242927433761283
+--- !u!114 &7435993309328319540
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
