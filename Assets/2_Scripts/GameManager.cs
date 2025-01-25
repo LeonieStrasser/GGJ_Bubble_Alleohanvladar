@@ -21,15 +21,20 @@ public class GameManager : MonoBehaviour
         {
             if (value == currentGameState)
             {
-                Debug.LogWarning($"Tried to set same GameState {value}. This shouldn't be happening.");
+                Debug.Log($"Tried to set same GameState {value}.");
                 return;
             }
+            Debug.Log($"GameState changing from {currentGameState} to {value}.");
             SetGameState(value, currentGameState);
             currentGameState = value;
             
         }
     }
     
+    [SerializeField, ReadOnly, BoxGroup("GameInfo")]
+    public CowboyController 
+        Cowboy1, 
+        Cowboy2;
     [SerializeField, ReadOnly, BoxGroup("GameInfo")]
     private Cowboy activeCowboy = Cowboy.None;
     public Cowboy ActiveCowboy
@@ -76,7 +81,7 @@ public class GameManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        CurrentGameState = startState;
     }
     
     //######################################################################################
