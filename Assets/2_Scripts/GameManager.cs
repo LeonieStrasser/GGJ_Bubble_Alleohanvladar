@@ -39,18 +39,15 @@ public class GameManager : MonoBehaviour
         Cowboy1, 
         Cowboy2;
 
+    public GameObject BottlePrefab;
+    
     private Bottle _bottle;
-
     public Bottle Bottle
     {
         get => _bottle;
         set
         {
             _bottle = value;
-            
-            //if a bottle is slotted in
-            if(_bottle)
-                _bottle.SetStartPosition();
         }
     }
     
@@ -79,7 +76,7 @@ public class GameManager : MonoBehaviour
 
 
     //######################################################################################
-    //#################################   Awake & Start   ##################################
+    //#######################   Awake, Start and other set-up stuff  #######################
     //######################################################################################
     private void Awake()
     {
@@ -107,6 +104,31 @@ public class GameManager : MonoBehaviour
     {
         //sets chosen state form inspector
         CurrentGameState = startState;
+    }
+
+    public void SetCowboySlot(CowboyController askingCowboy)
+    {
+        switch (askingCowboy.player)
+        {
+            case Cowboy.Cowboy1:
+                Cowboy1 = askingCowboy;
+                break;
+            case Cowboy.Cowboy2:
+                Cowboy2 = askingCowboy;
+                break;
+        }
+        
+        if(Cowboy1 && Cowboy2)
+            SetUpBottle();
+    }
+
+    private void SetUpBottle()
+    {
+        GameObject bottleObj = Instantiate(BottlePrefab);
+        Bottle = bottleObj.GetComponent<Bottle>();
+        Bottle.position1 = Cowboy1.HandPoint;
+        Bottle.position2 = Cowboy2.HandPoint;
+        Bottle.SetStartPosition();
     }
     
     //######################################################################################
