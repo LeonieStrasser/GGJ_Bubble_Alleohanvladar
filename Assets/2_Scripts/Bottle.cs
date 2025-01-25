@@ -21,8 +21,6 @@ public class Bottle : MonoBehaviour
             OnPreasureChange(value);
             bottlePreasure = value;
         }
-
-
     }
     [SerializeField, ReadOnly, BoxGroup("Debug")] bool BottleExploded = false;
 
@@ -46,17 +44,35 @@ public class Bottle : MonoBehaviour
     private float flyTimer;
     private Vector3 currentStartPosition;
     private Vector3 currentTargetPosition;
-    
 
+    
+    public Camera
+        bottleCam_P1_to_P2;
+
+
+    public void ActivateBottleCam()
+    {
+        bottleCam_P1_to_P2.gameObject.SetActive(true);
+    }
+    
+    public void DeactivateBottleCam()
+    {
+        bottleCam_P1_to_P2.gameObject.SetActive(false);
+    }
+    
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         GameManager.Instance.Bottle = this;
+        DeactivateBottleCam();
     }
+    
 
     public void SetStartPosition()
     {
         transform.position = position1.position;
+        transform.rotation = position1.rotation;
         ResetBottle();
         GameManager.Instance.Cowboy1.OnShake += OnShake;
         GameManager.Instance.Cowboy2.OnShake += OnShake;
@@ -82,7 +98,24 @@ public class Bottle : MonoBehaviour
 
     private void Update()
     {
-        if (GameManager.Instance.Flying) { UpdateBottleFlyPosition(); }
+        if(BottleExploded) return;
+        if (GameManager.Instance.Flying)
+        {
+            UpdateBottleFlyPosition();
+        }
+        else
+        {
+            if (GameManager.Instance.ActiveCowboy == Cowboy.Cowboy1)
+            {
+                transform.position = position1.position;
+                transform.rotation = position1.rotation;
+            }
+            else
+            {
+                transform.position = position2.position;
+                transform.rotation = position2.rotation;
+            }
+        }
 
         UpdateBubbleVFX();
     }
@@ -141,8 +174,8 @@ public class Bottle : MonoBehaviour
 
     void UpdateBubbleVFX()
     {
-        bubbleEffect1.SetFloat("Intensity", BottlePreasure);
-        bubbleEffect2.SetFloat("Intensity", BottlePreasure);
+        bubbleEffect1.SetFloat("Intensity", BottlePreasure/100);
+        bubbleEffect2.SetFloat("Intensity", BottlePreasure/100);
     }
 
 
@@ -173,6 +206,8 @@ public class Bottle : MonoBehaviour
         {
             Debug.LogWarning("ThrowCowboy hat die falsche ID!!!");
         }
+        
+        transform.rotation = Quaternion.Euler(Vector3.zero);
 
         GameManager.Instance.Flying = true;
     }

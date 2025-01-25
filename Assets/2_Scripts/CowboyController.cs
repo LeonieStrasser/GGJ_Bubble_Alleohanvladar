@@ -9,6 +9,12 @@ public class CowboyController : MonoBehaviour
 {
     public Cowboy player;
     public Transform HandPoint;
+
+    public Animator ArmAnimator;
+    
+    public GameObject 
+        PlayerDude, 
+        CowboyModel;
     
     [SerializeField, ReadOnly, BoxGroup("CowboyInfo")]
     private CowboyState playState = CowboyState.Idle;
@@ -20,6 +26,25 @@ public class CowboyController : MonoBehaviour
             Debug.Log($"{name}'s state was set to {value}.");
             StickValue = Vector2.zero;
             playState = value;
+
+            switch (playState)
+            {
+                case CowboyState.Shaking:
+                    ArmAnimator.speed = 1;
+                    CowboyModel.SetActive(false);
+                    PlayerDude.SetActive(true);
+                    break;
+                case CowboyState.Moving:
+                    ArmAnimator.speed = 0;
+                    CowboyModel.SetActive(true);
+                    PlayerDude.SetActive(false);
+                    break;
+                
+                default:
+                case CowboyState.Idle:
+                    ArmAnimator.speed = 0;
+                    break;
+            }
         }
     }
 
@@ -47,6 +72,8 @@ public class CowboyController : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+
+        ArmAnimator.speed = 0;
         
         //assign self to Game manager slot and get relevant analog stick
         
