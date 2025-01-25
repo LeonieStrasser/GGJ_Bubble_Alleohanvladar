@@ -50,6 +50,8 @@ MonoBehaviour:
   HandPoint: {fileID: 7396826510153483815}
   ArmAnimator: {fileID: 349603158494852122}
   PlayerDude: {fileID: 6368204085988866997}
+  PlayerDudeLowerArm: {fileID: 4835828324653786013}
+  PlayerDudeHand: {fileID: 6552420906857790154}
   CowboyModel: {fileID: 1830093421860438885}
   playState: 0
   LeftStickPath: Player/Cowboy_1_Stick
@@ -57,6 +59,8 @@ MonoBehaviour:
   RightStickPath: Player/Cowboy_2_Stick
   RightTriggerPath: Player/Cowboy_2_Toss
   StickValue: {x: 0, y: 0}
+  StickVelocity: 0
+  VelocityChangeToPressureBuiltUpFactor: 0.0055
 --- !u!1 &9088555386515488748
 GameObject:
   m_ObjectHideFlags: 0
@@ -270,6 +274,34 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -1203701747665933932, guid: 5802560e776edd540852672ce5764833, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9770701
+      objectReference: {fileID: 0}
+    - target: {fileID: -1203701747665933932, guid: 5802560e776edd540852672ce5764833, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.21274903
+      objectReference: {fileID: 0}
+    - target: {fileID: -1203701747665933932, guid: 5802560e776edd540852672ce5764833, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.0018054617
+      objectReference: {fileID: 0}
+    - target: {fileID: -1203701747665933932, guid: 5802560e776edd540852672ce5764833, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.008291489
+      objectReference: {fileID: 0}
+    - target: {fileID: -1203701747665933932, guid: 5802560e776edd540852672ce5764833, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -24.564
+      objectReference: {fileID: 0}
+    - target: {fileID: -1203701747665933932, guid: 5802560e776edd540852672ce5764833, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0.445
+      objectReference: {fileID: 0}
+    - target: {fileID: -1203701747665933932, guid: 5802560e776edd540852672ce5764833, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -1.069
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 5802560e776edd540852672ce5764833, type: 3}
       propertyPath: m_Name
       value: Dude_01
@@ -304,7 +336,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4835828324653786013}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 973516120de5179478abb2459f31a064, type: 2}
   m_CullingMode: 0
@@ -326,5 +358,10 @@ Transform:
 --- !u!1 &6368204085988866997 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 5802560e776edd540852672ce5764833, type: 3}
+  m_PrefabInstance: {fileID: 6098170976846186212}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6552420906857790154 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1031304697851051054, guid: 5802560e776edd540852672ce5764833, type: 3}
   m_PrefabInstance: {fileID: 6098170976846186212}
   m_PrefabAsset: {fileID: 0}

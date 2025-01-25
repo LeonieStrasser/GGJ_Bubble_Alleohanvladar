@@ -2,29 +2,45 @@ using System;
 using GGJ_Cowboys;
 using NaughtyAttributes;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.VFX;
 using Random = UnityEngine.Random;
 
 public class Bottle : MonoBehaviour
 {
     [Header("Bottle Preasure")]
+    [SerializeField, ReadOnly, BoxGroup("Debug")] bool BottleExploded = false;
+    
     [MinMaxSlider(0.0f, 100.0f)]
-    public Vector2 maxPreasureRange;
-    [SerializeField, ReadOnly, BoxGroup("Debug")] private float preasureMaxLimit;
+    public Vector2 maxPressureRange;
+    
+    [SerializeField, ReadOnly, BoxGroup("Debug")] private float pressureMaxLimit;
     [SerializeField] float preasureIncreaseSpeedMultiplyer = .5f;
-    [SerializeField, ReadOnly, BoxGroup("Debug")] private float bottlePreasure;
-    float BottlePreasure
+    
+    [SerializeField, ReadOnly, BoxGroup("Debug")] 
+    private float currentBottlePressure;
+    float CurrentBottlePressure
     {
-        get { return bottlePreasure; }
+        get { return currentBottlePressure; }
         set
         {
-            OnPreasureChange(value);
-            bottlePreasure = value;
+            currentBottlePressure = value;
+            if(!BottleExploded)
+                OnPreasureChange();
         }
     }
-    [SerializeField, ReadOnly, BoxGroup("Debug")] bool BottleExploded = false;
 
+    /// <summary>
+    /// This value gets stocked up by the velocity changes exerted on the bottle.
+    /// It drains into the bottle pressure over time.
+    /// The higher the built-up, the faster the draining.
+    /// </summary>
+    [SerializeField, Tooltip("This value gets stocked up by the velocity changes exerted on the bottle.\n It drains into the bottle pressure over time.\n The higher the built-up, the faster the draining.")]
+    private float pressureBuiltUp;
 
+    [SerializeField]
+    private float pressureConversionRate = 10;
+    
     [HorizontalLine(color: EColor.Blue)]
     [Header("Preasure Feedback")]
     [SerializeField] BottleFeedbackTrigger[] feedbackMarker;
@@ -65,7 +81,6 @@ public class Bottle : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        GameManager.Instance.Bottle = this;
         DeactivateBottleCam();
     }
     
@@ -75,8 +90,8 @@ public class Bottle : MonoBehaviour
         transform.position = position1.position;
         transform.rotation = position1.rotation;
         ResetBottle();
-        GameManager.Instance.Cowboy1.OnShake += OnShake;
-        GameManager.Instance.Cowboy2.OnShake += OnShake;
+        //GameManager.Instance.Cowboy1.OnShake += OnShake;
+        //GameManager.Instance.Cowboy2.OnShake += OnShake;
     }
 
     private void OnShake(Shake shakeStrength)
@@ -99,44 +114,72 @@ public class Bottle : MonoBehaviour
 
     private void Update()
     {
+        //do nothing if bottle already blew up
         if(BottleExploded) return;
+        
         if (GameManager.Instance.Flying)
         {
             UpdateBottleFlyPosition();
         }
         else
         {
-            if (GameManager.Instance.ActiveCowboy == Cowboy.Cowboy1)
-            {
-                transform.position = position1.position;
-                transform.rotation = position1.rotation;
-            }
-            else
-            {
-                transform.position = position2.position;
-                transform.rotation = position2.rotation;
-            }
+            RotateToActiveCowboyHandTransform();
         }
+
+        IncreasePressureFromBuildUp();
 
         UpdateBubbleVFX();
     }
 
+    private void RotateToActiveCowboyHandTransform()
+    {
+        if (GameManager.Instance.ActiveCowboy == Cowboy.Cowboy1)
+        {
+            transform.position = position1.position;
+            transform.rotation = position1.rotation;
+        }
+        else
+        {
+            transform.position = position2.position;
+            transform.rotation = position2.rotation;
+        }
+    }
+
     private void ResetBottle()
     {
-        preasureMaxLimit = Random.Range(maxPreasureRange.x, maxPreasureRange.y);
+        pressureMaxLimit = Random.Range(maxPressureRange.x, maxPressureRange.y);
         foreach (var feedbackMarker in feedbackMarker)
         {
             feedbackMarker.SetTriggerTime();
             feedbackMarker.triggered = false;
         }
-        BottlePreasure = 0; // muss hier am ende stehen!!!
+        CurrentBottlePressure = 0; // muss hier am ende stehen!!!
     }
-    #region preasure
-    private void OnPreasureChange(float currentPreasue)
+    #region pressure
+
+    public void AddPressureBuiltUp(float addedBuildUp)
+    {
+        pressureBuiltUp += addedBuildUp;
+    }
+
+    private void IncreasePressureFromBuildUp()
+    {
+        float pressureBuiltUpFactor = pressureBuiltUp / 100f;
+        float pressureConversion = Time.deltaTime * pressureConversionRate * pressureBuiltUpFactor;
+
+        float oldPressureBuiltUp = pressureBuiltUp;
+        pressureBuiltUp = Mathf.Clamp(pressureBuiltUp - pressureConversion, 0, Single.MaxValue);
+
+        float pressureChange = oldPressureBuiltUp - pressureBuiltUp;
+        
+        CurrentBottlePressure += pressureChange;
+    }
+    
+    private void OnPreasureChange()
     {
         foreach (var feedbackMarker in feedbackMarker)
         {
-            if (!feedbackMarker.triggered && currentPreasue >= feedbackMarker.triggerTime)
+            if (!feedbackMarker.triggered && CurrentBottlePressure >= feedbackMarker.triggerTime)
             {
                 feedbackMarker.feedbackEvent.Invoke();
 
@@ -145,6 +188,10 @@ public class Bottle : MonoBehaviour
                 Debug.Log("Bottle FEEDBACK was triggered at Preasure Value " + feedbackMarker.triggerTime);
             }
         }
+        
+        //check for explosion
+        if(CurrentBottlePressure > pressureMaxLimit)
+            BottleExploding();
 
     }
 
@@ -154,14 +201,14 @@ public class Bottle : MonoBehaviour
     {
         if (!BottleExploded)
         {
-            BottlePreasure = Mathf.Clamp(BottlePreasure + increaseValue * preasureIncreaseSpeedMultiplyer, 0, 100);
+            CurrentBottlePressure = Mathf.Clamp(CurrentBottlePressure + increaseValue * preasureIncreaseSpeedMultiplyer, 0, 100);
 
 
             // Bottle exploading
-            if (bottlePreasure >= preasureMaxLimit)
+            if (currentBottlePressure >= pressureMaxLimit)
             {
-                BottleExploding();
-                BottleExploded = true;
+                
+                
             }
             return true;
         }else {return false; }
@@ -175,8 +222,8 @@ public class Bottle : MonoBehaviour
 
     void UpdateBubbleVFX()
     {
-        bubbleEffect1.SetFloat("Intensity", BottlePreasure/100);
-        bubbleEffect2.SetFloat("Intensity", BottlePreasure/100);
+        bubbleEffect1.SetFloat("Intensity", CurrentBottlePressure/100);
+        bubbleEffect2.SetFloat("Intensity", CurrentBottlePressure/100);
     }
 
 
@@ -247,7 +294,8 @@ public class Bottle : MonoBehaviour
 
     private void BottleExploding()
     {
-        Debug.Log("Bottle exploaded by Preasure Value of " + preasureMaxLimit + ".");
+        BottleExploded = true;
+        Debug.Log($"Bottle exploded by pressure Value of {pressureMaxLimit}. BuildUp was {pressureBuiltUp}");
 
         //melde dem Gamemanager dass explosion passiert is
         GameManager.Instance.CurrentGameState = GameManager.GameState.PostGame;
@@ -262,8 +310,14 @@ public class Bottle : MonoBehaviour
 
     private void OnDestroy()
     {
-        GameManager.Instance.Cowboy1.OnShake -= OnShake;
-        GameManager.Instance.Cowboy2.OnShake -= OnShake;
+        //GameManager.Instance.Cowboy1.OnShake -= OnShake;
+        //GameManager.Instance.Cowboy2.OnShake -= OnShake;
         GameManager.Instance.Bottle = null;
+    }
+
+    void OnGUI()
+    {
+        GUI.Box(new Rect(Screen.width - 200, Screen.height - 300 - pressureBuiltUp * 3, 100, pressureBuiltUp * 3), $"PBU: {pressureBuiltUp}");
+        GUI.Box(new Rect(Screen.width -350,Screen.height - 300 -CurrentBottlePressure * 3, 100, CurrentBottlePressure * 3), $"CBP: {CurrentBottlePressure}");
     }
 }

@@ -49,6 +49,10 @@ public class GameManager : MonoBehaviour
         set
         {
             _bottle = value;
+            if (Bottle)
+                Debug.Log("Linked Bottle in GameManager");
+            else
+                Debug.Log("Removed Bottle from GameManager");
         }
     }
     
@@ -132,6 +136,8 @@ public class GameManager : MonoBehaviour
             Cowboy2.PlayerDude.SetActive(false);
             Cowboy2.CowboyModel.SetActive(true);
             SetUpBottle();
+            
+            CameraManager.Instance.LookAtPlayer1();
         }
             
     }
@@ -140,7 +146,7 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Spawn bottle");
         GameObject bottleObj = Instantiate(BottlePrefab);
-        Bottle = bottleObj.GetComponent<Bottle>();
+        Instance.Bottle = bottleObj.GetComponent<Bottle>();
         Bottle.position1 = Cowboy1.HandPoint;
         Bottle.position2 = Cowboy2.HandPoint;
         Bottle.SetStartPosition();

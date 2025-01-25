@@ -411,11 +411,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 191c104139ac37448b8bb60ea2549ace, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxPreasureRange: {x: 11.643833, y: 100}
-  preasureMaxLimit: 0
-  preasureIncreaseSpeedMultiplyer: 0.5
-  bottlePreasure: 0
   BottleExploded: 0
+  maxPressureRange: {x: 65.15151, y: 100}
+  pressureMaxLimit: 0
+  preasureIncreaseSpeedMultiplyer: 0.5
+  currentBottlePressure: 0
+  pressureBuiltUp: 0
+  pressureConversionRate: 25
   feedbackMarker:
   - triggerTime: 0
     triggerRange: {x: 16.723679, y: 57.01255}

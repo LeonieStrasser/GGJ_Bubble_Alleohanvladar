@@ -13,8 +13,13 @@ public class CowboyController : MonoBehaviour
     public Animator ArmAnimator;
     
     public GameObject 
-        PlayerDude, 
+        PlayerDude,
+        PlayerDudeLowerArm,
+        PlayerDudeHand,
         CowboyModel;
+
+    private Quaternion ArmStartRotation, HandStartRotation;
+    private Vector2 ArmMoveSpanDeg = new Vector2(18, 24);
     
     [SerializeField, ReadOnly, BoxGroup("CowboyInfo")]
     private CowboyState playState = CowboyState.Idle;
@@ -63,6 +68,12 @@ public class CowboyController : MonoBehaviour
 
     [SerializeField, ReadOnly] 
     private Vector2 StickValue;
+    [SerializeField, ReadOnly] 
+    private float StickVelocity;
+    
+    [SerializeField]
+    private float VelocityChangeToPressureBuiltUpFactor = 0.0037f;
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -74,7 +85,8 @@ public class CowboyController : MonoBehaviour
         }
 
         ArmAnimator.speed = 0;
-        
+        ArmStartRotation = PlayerDudeLowerArm.transform.rotation;
+        HandStartRotation = PlayerDudeHand.transform.localRotation;
         //assign self to Game manager slot and get relevant analog stick
         
         GameManager.Instance.SetCowboySlot(this);
@@ -102,7 +114,9 @@ public class CowboyController : MonoBehaviour
     {
         switch (PlayState)
         {
+            default:
             case CowboyState.Idle:
+                // do nothing
                 break;
             case CowboyState.Shaking:
                 Shake();
@@ -118,11 +132,38 @@ public class CowboyController : MonoBehaviour
         Vector2 lastStickValue = StickValue;
         StickValue = AnalogStick.ReadValue<Vector2>();
 
+        MoveArm();
+
+        float lastStickVelocity = StickVelocity;
+        Vector2 stickMoveDelta = StickValue - lastStickValue;
+        StickVelocity = stickMoveDelta.magnitude / Time.fixedDeltaTime;
+        float deltaVelocityChange = Mathf.Abs(StickVelocity - lastStickVelocity);
+        GameManager.Instance.Bottle.AddPressureBuiltUp(deltaVelocityChange * VelocityChangeToPressureBuiltUpFactor);
+        
         if (Mathf.Abs(lastStickValue.y) < 0.75f && Mathf.Abs(StickValue.y) > 0.75f)
         {
             OnShake?.Invoke(GGJ_Cowboys.Shake.Small);
             Debug.Log($"{name}'s stick is at {StickValue} @ Frame {Time.frameCount}");
         }
+    }
+
+    private void MoveArm()
+    {
+        //Move lower arm
+        Vector3 oldArmEulerAngles = PlayerDudeLowerArm.transform.rotation.eulerAngles;
+        Vector3 newArmEulerAngles = ArmStartRotation.eulerAngles +
+                                    new Vector3(StickValue.y * -ArmMoveSpanDeg.y, 0, StickValue.x * ArmMoveSpanDeg.x);
+        PlayerDudeLowerArm.transform.rotation = Quaternion.Euler(newArmEulerAngles);
+
+        //move hand opposite
+        Vector3 eulerAngleDif = (oldArmEulerAngles - newArmEulerAngles) * 2;
+        Vector3 newEulerAngle = PlayerDudeHand.transform.localRotation.eulerAngles + eulerAngleDif;
+        
+        PlayerDudeHand.transform.localRotation = Quaternion.Euler(newEulerAngle);
+        
+        //lerp hand rot to target.
+        Vector3 newTargetEulers = HandStartRotation.eulerAngles + new Vector3(StickValue.y * -ArmMoveSpanDeg.y, 0, StickValue.x * ArmMoveSpanDeg.x);
+        PlayerDudeHand.transform.localRotation = Quaternion.Lerp(PlayerDudeHand.transform.localRotation, Quaternion.Euler(newTargetEulers), Time.fixedDeltaTime * 10);
     }
 
     private void Move()
