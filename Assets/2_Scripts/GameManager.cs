@@ -4,9 +4,13 @@ using UnityEngine;
 using NaughtyAttributes;
 using UnityEngine.Serialization;
 
+
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
+
+    [SerializeField] 
+    private GameState startState = GameState.Menu;
     
     [SerializeField, ReadOnly, BoxGroup("GameInfo")]
     private GameState currentGameState = GameState.Menu;
@@ -50,6 +54,9 @@ public class GameManager : MonoBehaviour
     //######################################################################################
     private void Awake()
     {
+        //prevent deletion
+        DontDestroyOnLoad(this);
+        
         SetSingleton();
     }
 
