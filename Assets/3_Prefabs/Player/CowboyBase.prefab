@@ -157,6 +157,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: 0
+  HandPoint: {fileID: 7396826510153483815}
   playState: 0
   LeftStickPath: Player/Cowboy_1_Stick
   LeftTriggerPath: Player/Cowboy_1_Toss

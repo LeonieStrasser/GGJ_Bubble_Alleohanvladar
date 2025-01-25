@@ -8,6 +8,7 @@ using UnityEngine.InputSystem;
 public class CowboyController : MonoBehaviour
 {
     public Cowboy player;
+    public Transform HandPoint;
     
     [SerializeField, ReadOnly, BoxGroup("CowboyInfo")]
     private CowboyState playState = CowboyState.Idle;
@@ -48,18 +49,19 @@ public class CowboyController : MonoBehaviour
         }
         
         //assign self to Game manager slot and get relevant analog stick
+        
+        GameManager.Instance.SetCowboySlot(this);
+        
         switch (player)
         {
             default:
             case Cowboy.None:
                 break;
             case Cowboy.Cowboy1:
-                GameManager.Instance.Cowboy1 = this;
                 AnalogStick = InputSystem.actions.FindAction(LeftStickPath);
                 Toss = InputSystem.actions.FindAction(LeftTriggerPath);
                 break;
             case Cowboy.Cowboy2:
-                GameManager.Instance.Cowboy2 = this;
                 AnalogStick = InputSystem.actions.FindAction(RightStickPath);
                 Toss = InputSystem.actions.FindAction(RightTriggerPath);
                 break;

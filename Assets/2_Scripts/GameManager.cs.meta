@@ -1,2 +1,14 @@
 fileFormatVersion: 2
 guid: ff4e17b8fcb99f94996dc6019b9787fd
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - Cowboy1: {instanceID: 0}
+  - Cowboy2: {instanceID: 0}
+  - BottlePrefab: {fileID: 2633130979891860562, guid: d211ec2eceb951f428e731c7fc7cbf7f, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
