@@ -3,6 +3,10 @@ using UnityEngine;
 
 public class Bottle : MonoBehaviour
 {
+    private GameManager myGameManager;
+
+
+
     [Header("Bottle Preasure")]
     [SerializeField] float preasureIncreaseSpeedMultiplyer = .5f;
     private float bottlePreasure;
@@ -28,11 +32,17 @@ public class Bottle : MonoBehaviour
     [SerializeField] Transform position1;
     [SerializeField] Transform position2;
     [SerializeField] AnimationCurve flyingSpeedCurve;
+    [SerializeField] AnimationCurve yOffsetCurve;
 
-    private bool flying;
+    
     private float flyTimer;
     private Vector3 currentStartPosition;
     private Vector3 currentTargetPosition;
+
+    private void Awake()
+    {
+        myGameManager = FindAnyObjectByType<GameManager>();
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -45,7 +55,7 @@ public class Bottle : MonoBehaviour
 
     private void Update()
     {
-        if (flying) { UpdateBottleFlyPosition(); }
+        if (myGameManager.Flying) { UpdateBottleFlyPosition(); }
     }
 
     #region preasure
@@ -108,14 +118,14 @@ public class Bottle : MonoBehaviour
             Debug.LogWarning("ThrowCowboy hat die falsche ID!!!");
         }
 
-        flying = true;
+        myGameManager.Flying = true;
     }
 
     void UpdateBottleFlyPosition()
     {
         float flyProgress = flyTimer / flyingTime;
         float value = flyingSpeedCurve.Evaluate(flyProgress);
-        Vector3 lerpedPosition = Vector3.Lerp(currentStartPosition, currentTargetPosition, value);
+        Vector3 lerpedPosition = Vector3.Lerp(currentStartPosition, currentTargetPosition, value); // + new Vector3(0, yOffsetCurve.Evaluate(flyProgress), 0);
         transform.position = lerpedPosition;
 
         flyTimer += Time.deltaTime;
@@ -124,7 +134,7 @@ public class Bottle : MonoBehaviour
 
         if (flyTimer >= flyingTime)
         {
-            flying = false;
+            myGameManager.Flying = false;
             flyTimer = 0;
 
             transform.position = currentTargetPosition;

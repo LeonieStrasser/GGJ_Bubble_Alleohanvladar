@@ -656,12 +656,40 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2101172050939427817, guid: d211ec2eceb951f428e731c7fc7cbf7f, type: 3}
+      propertyPath: yOffsetCurve.m_Curve.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2101172050939427817, guid: d211ec2eceb951f428e731c7fc7cbf7f, type: 3}
       propertyPath: flyingSpeedCurve.m_Curve.Array.size
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2101172050939427817, guid: d211ec2eceb951f428e731c7fc7cbf7f, type: 3}
+      propertyPath: yOffsetCurve.m_Curve.Array.data[1].time
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2101172050939427817, guid: d211ec2eceb951f428e731c7fc7cbf7f, type: 3}
+      propertyPath: yOffsetCurve.m_Curve.Array.data[2].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2101172050939427817, guid: d211ec2eceb951f428e731c7fc7cbf7f, type: 3}
       propertyPath: feedbackMarker.Array.data[0].triggerTime
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2101172050939427817, guid: d211ec2eceb951f428e731c7fc7cbf7f, type: 3}
+      propertyPath: yOffsetCurve.m_Curve.Array.data[0].value
+      value: 0.08673096
+      objectReference: {fileID: 0}
+    - target: {fileID: 2101172050939427817, guid: d211ec2eceb951f428e731c7fc7cbf7f, type: 3}
+      propertyPath: yOffsetCurve.m_Curve.Array.data[1].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2101172050939427817, guid: d211ec2eceb951f428e731c7fc7cbf7f, type: 3}
+      propertyPath: yOffsetCurve.m_Curve.Array.data[0].inSlope
+      value: 1.8265381
+      objectReference: {fileID: 0}
+    - target: {fileID: 2101172050939427817, guid: d211ec2eceb951f428e731c7fc7cbf7f, type: 3}
+      propertyPath: yOffsetCurve.m_Curve.Array.data[2].inSlope
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 2101172050939427817, guid: d211ec2eceb951f428e731c7fc7cbf7f, type: 3}
       propertyPath: feedbackMarker.Array.data[0].triggerRange.x
@@ -696,6 +724,14 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2101172050939427817, guid: d211ec2eceb951f428e731c7fc7cbf7f, type: 3}
+      propertyPath: yOffsetCurve.m_Curve.Array.data[0].outSlope
+      value: 1.8265381
+      objectReference: {fileID: 0}
+    - target: {fileID: 2101172050939427817, guid: d211ec2eceb951f428e731c7fc7cbf7f, type: 3}
+      propertyPath: yOffsetCurve.m_Curve.Array.data[2].outSlope
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2101172050939427817, guid: d211ec2eceb951f428e731c7fc7cbf7f, type: 3}
       propertyPath: flyingSpeedCurve.m_Curve.Array.data[0].value
       value: 0
       objectReference: {fileID: 0}
@@ -714,6 +750,14 @@ PrefabInstance:
     - target: {fileID: 2101172050939427817, guid: d211ec2eceb951f428e731c7fc7cbf7f, type: 3}
       propertyPath: flyingSpeedCurve.m_Curve.Array.data[2].inSlope
       value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2101172050939427817, guid: d211ec2eceb951f428e731c7fc7cbf7f, type: 3}
+      propertyPath: yOffsetCurve.m_Curve.Array.data[0].tangentMode
+      value: 34
+      objectReference: {fileID: 0}
+    - target: {fileID: 2101172050939427817, guid: d211ec2eceb951f428e731c7fc7cbf7f, type: 3}
+      propertyPath: yOffsetCurve.m_Curve.Array.data[2].tangentMode
+      value: 34
       objectReference: {fileID: 0}
     - target: {fileID: 2101172050939427817, guid: d211ec2eceb951f428e731c7fc7cbf7f, type: 3}
       propertyPath: flyingSpeedCurve.m_Curve.Array.data[0].outSlope
