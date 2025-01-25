@@ -2,6 +2,7 @@ using System;
 using GGJ_Cowboys;
 using NaughtyAttributes;
 using UnityEngine;
+using UnityEngine.VFX;
 using Random = UnityEngine.Random;
 
 public class Bottle : MonoBehaviour
@@ -29,6 +30,8 @@ public class Bottle : MonoBehaviour
     [HorizontalLine(color: EColor.Blue)]
     [Header("Preasure Feedback")]
     [SerializeField] BottleFeedbackTrigger[] feedbackMarker;
+    [SerializeField] VisualEffect bubbleEffect1;
+    [SerializeField] VisualEffect bubbleEffect2;
 
     [HorizontalLine(color: EColor.Blue)]
     [Header("Throwing")]
@@ -80,6 +83,8 @@ public class Bottle : MonoBehaviour
     private void Update()
     {
         if (GameManager.Instance.Flying) { UpdateBottleFlyPosition(); }
+
+        UpdateBubbleVFX();
     }
 
     private void ResetBottle()
@@ -132,6 +137,12 @@ public class Bottle : MonoBehaviour
     public void DebugIncreasePreasure()
     {
         TryIncreasePreasurebyValue(5);
+    }
+
+    void UpdateBubbleVFX()
+    {
+        bubbleEffect1.SetFloat("Intensity", BottlePreasure);
+        bubbleEffect2.SetFloat("Intensity", BottlePreasure);
     }
 
 
