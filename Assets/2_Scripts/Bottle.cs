@@ -33,6 +33,8 @@ public class Bottle : MonoBehaviour
     [SerializeField] Transform position2;
     [SerializeField] AnimationCurve flyingSpeedCurve;
     [SerializeField] AnimationCurve yOffsetCurve;
+    [SerializeField] float hightMultiplyer = 1;
+    [SerializeField] float SpeedCurveMultiplyer = 2;
 
     
     private float flyTimer;
@@ -124,11 +126,21 @@ public class Bottle : MonoBehaviour
     void UpdateBottleFlyPosition()
     {
         float flyProgress = flyTimer / flyingTime;
+
+        // Werte aus der yOffsetCurve abrufen
+        float yValue = yOffsetCurve.Evaluate(flyProgress);
+        float yValueNext = yOffsetCurve.Evaluate(flyProgress + 0.01f); // Kleiner Schritt für Steigung
+        float yCurveSlope = Mathf.Abs((yValueNext - yValue) / 0.01f); // Änderungsrate (Steigung)
+
+        // Geschwindigkeit basierend auf der Steigung anpassen
+        float adjustedFlySpeed = Mathf.Lerp(1f, SpeedCurveMultiplyer, yCurveSlope); // Anpassen des Speed-Faktors (Skalierung nach Bedarf)
+
+
         float value = flyingSpeedCurve.Evaluate(flyProgress);
-        Vector3 lerpedPosition = Vector3.Lerp(currentStartPosition, currentTargetPosition, value); // + new Vector3(0, yOffsetCurve.Evaluate(flyProgress), 0);
+        Vector3 lerpedPosition = Vector3.Lerp(currentStartPosition, currentTargetPosition, flyProgress) + new Vector3(0, yOffsetCurve.Evaluate(flyProgress)*hightMultiplyer, 0);
         transform.position = lerpedPosition;
 
-        flyTimer += Time.deltaTime;
+        flyTimer += Time.deltaTime * adjustedFlySpeed;
 
         // if throw finished
 
