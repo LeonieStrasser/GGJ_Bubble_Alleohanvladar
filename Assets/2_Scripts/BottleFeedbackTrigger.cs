@@ -5,7 +5,7 @@ using UnityEngine.Events;
 [System.Serializable]
 public class BottleFeedbackTrigger
 {
-    public float triggerTime;
+    [SerializeField, ReadOnly, BoxGroup("Debug")] public float triggerTime;
     [MinMaxSlider(0.0f, 100.0f)]
     public Vector2 triggerRange;
     public bool triggered = false;
