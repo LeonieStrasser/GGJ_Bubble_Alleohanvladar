@@ -1,4 +1,5 @@
 using System;
+using FMOD.Studio;
 using GGJ_Cowboys;
 using UnityEngine;
 
@@ -12,7 +13,9 @@ public class SoundCenter : MonoBehaviour
         bigShakeInstance,
         bottleTossInstance,
         bottleCatchInstance,
-        bottleExplosionInstance;
+        bottleExplosionInstance,
+        menuMusicInstance,
+        gameMusicInstance;
 
     private void Awake()
     {
@@ -76,5 +79,23 @@ public class SoundCenter : MonoBehaviour
         bottleExplosionInstance = FMODUnity.RuntimeManager.CreateInstance("event:/Explosion/Explosion");
         bottleExplosionInstance.start();
         bottleExplosionInstance.release();
+    }
+    
+    public void StartMenuMusic()
+    {
+        menuMusicInstance = FMODUnity.RuntimeManager.CreateInstance("event:/Music/Menu_Music");
+        menuMusicInstance.start();
+
+        gameMusicInstance.stop(STOP_MODE.ALLOWFADEOUT);
+        gameMusicInstance.release();
+    }
+    
+    public void StartGameMusic()
+    {
+        gameMusicInstance = FMODUnity.RuntimeManager.CreateInstance("event:/Music/Game_Music");
+        gameMusicInstance.start();
+        
+        menuMusicInstance.stop(STOP_MODE.ALLOWFADEOUT);
+        menuMusicInstance.release();
     }
 }
