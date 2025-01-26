@@ -384,9 +384,9 @@ public class Bottle : MonoBehaviour
     {
         return (value - fromMin) / (fromMax - fromMin) * (toMax - toMin) + toMin;
     }
-    void OnGUI()
+    /*void OnGUI()
     {
         GUI.Box(new Rect(Screen.width - 200, Screen.height - 300 - pressureBuiltUp * 3, 100, pressureBuiltUp * 3), $"PBU: {pressureBuiltUp}");
         GUI.Box(new Rect(Screen.width - 350, Screen.height - 300 - CurrentBottlePressure * 3, 100, CurrentBottlePressure * 3), $"CBP: {CurrentBottlePressure}");
-    }
+    }*/
 }

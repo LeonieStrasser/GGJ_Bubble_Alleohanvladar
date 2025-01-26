@@ -11,6 +11,7 @@ public class GameSceneManager : MonoBehaviour
             Debug.Log("No GameManager found. Create new.");
             GameObject debugGameManager = new GameObject("DebugGameManager");
             GameManager newGameManager = debugGameManager.AddComponent<GameManager>();
+            debugGameManager.AddComponent<SoundCenter>();
             newGameManager.startState = GameManager.GameState.PreGame;
         }
     }

@@ -16,7 +16,8 @@ public class CowboyController : MonoBehaviour
         PlayerDude,
         PlayerDudeLowerArm,
         PlayerDudeHand,
-        CowboyModel;
+        CowboyModel,
+        WinningCowboy;
 
     private Quaternion ArmStartRotation, HandStartRotation;
     private Vector2 ArmMoveSpanDeg = new Vector2(18, 24);
@@ -38,11 +39,19 @@ public class CowboyController : MonoBehaviour
                     ArmAnimator.speed = 1;
                     CowboyModel.SetActive(false);
                     PlayerDude.SetActive(true);
+                    WinningCowboy.SetActive(false);
                     break;
                 case CowboyState.Moving:
                     ArmAnimator.speed = 0;
                     CowboyModel.SetActive(true);
                     PlayerDude.SetActive(false);
+                    WinningCowboy.SetActive(false);
+                    break;
+                
+                case CowboyState.Winning:
+                    CowboyModel.SetActive(false);
+                    PlayerDude.SetActive(false);
+                    WinningCowboy.SetActive(true);
                     break;
                 
                 default:
@@ -218,5 +227,6 @@ public enum CowboyState
 {
     Idle,
     Shaking,
+    Winning,
     Moving
 }

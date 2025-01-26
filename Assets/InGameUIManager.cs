@@ -64,10 +64,15 @@ public class InGameUIManager : MonoBehaviour
             case Cowboy.Cowboy1:
                 Cowboy_1_Green_Lost.gameObject.SetActive(true);
                 Cowboy_2_Blue_Lost.gameObject.SetActive(false);
+                GameManager.Instance.Cowboy2.PlayState = CowboyState.Winning;
+                CameraManager.Instance.LookAtPlayer1();
             break;
+            
             case Cowboy.Cowboy2:
                 Cowboy_1_Green_Lost.gameObject.SetActive(false);
                 Cowboy_2_Blue_Lost.gameObject.SetActive(true);
+                GameManager.Instance.Cowboy1.PlayState = CowboyState.Winning;
+                CameraManager.Instance.LookAtPlayer2();
             break;
             
             default:

@@ -31,7 +31,8 @@ public class CameraManager : MonoBehaviour
         Debug.Log("Switched to Bottle Camera");
         cameraPlayer1.SetActive(false);
         cameraPlayer2.SetActive(false);
-        GameManager.Instance.Bottle.ActivateBottleCam();
+        if(GameManager.Instance.Bottle)
+            GameManager.Instance.Bottle.ActivateBottleCam();
     }
 
     public void LookAtPlayer1()
@@ -39,7 +40,8 @@ public class CameraManager : MonoBehaviour
         Debug.Log("Switched to Player 1 Camera");
         cameraPlayer1.SetActive(true);
         cameraPlayer2.SetActive(false);
-        GameManager.Instance.Bottle.DeactivateBottleCam();
+        if(GameManager.Instance.Bottle)
+            GameManager.Instance.Bottle.DeactivateBottleCam();
     }
 
     public void LookAtPlayer2()
@@ -47,7 +49,8 @@ public class CameraManager : MonoBehaviour
         Debug.Log("Switched to Player 2 Camera");
         cameraPlayer1.SetActive(false);
         cameraPlayer2.SetActive(true);
-        GameManager.Instance.Bottle.DeactivateBottleCam();
+        if(GameManager.Instance.Bottle)
+            GameManager.Instance.Bottle.DeactivateBottleCam();
     }
 
 
