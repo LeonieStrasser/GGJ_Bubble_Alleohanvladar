@@ -286,6 +286,7 @@ public class GameManager : MonoBehaviour
     public void ReportBottleExploded()
     {
         Instance.CurrentGameState = GameState.PostGame;
+        Instance.Flying = false;
     }
 
     public void ReturnToMenu()

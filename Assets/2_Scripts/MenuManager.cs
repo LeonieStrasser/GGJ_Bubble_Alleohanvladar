@@ -12,6 +12,8 @@ public class MenuManager : MonoBehaviour
     {
         EventSystem.current.SetSelectedGameObject(DefaultSelectedMenuButton);
         GameManager.Instance.CurrentGameState = GameManager.GameState.Menu;
+        
+        SoundCenter.Instance.StartMenuMusic();
     }
 
     public void LoadGame()
@@ -30,11 +32,5 @@ public class MenuManager : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
-    }
-    
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

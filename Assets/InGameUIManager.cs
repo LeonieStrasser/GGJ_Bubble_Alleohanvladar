@@ -81,4 +81,10 @@ public class InGameUIManager : MonoBehaviour
         //Report back to game manager
         GameManager.Instance.ReturnToMenu();
     }
+
+    private void OnDestroy()
+    {
+        GameManager.Instance.OnGameWon -= OnGameWon;
+        GameManager.Instance.OnBottleTouched -= OnBottleTouched;
+    }
 }
