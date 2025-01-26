@@ -85,7 +85,7 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public Action<Cowboy> OnGameWon;
+    public Action<Cowboy> OnGameWon, OnBottleTouched;
     
     //######################################################################################
     //#######################   Awake, Start and other set-up stuff  #######################
@@ -279,6 +279,8 @@ public class GameManager : MonoBehaviour
                 ActiveCowboy = Cowboy.Cowboy1;
                 break;
         }
+        
+        OnBottleTouched?.Invoke(ActiveCowboy);
     }
 
     public void ReportBottleExploded()
