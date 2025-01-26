@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using GGJ_Cowboys;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +9,9 @@ public class InGameUIManager : MonoBehaviour
 {
     public Image Cowboy_1_Green_Lost;
     public Image Cowboy_2_Blue_Lost;
+
+    public GameObject Player1_Green_Touched;
+    public GameObject Player2_Blue_Touched;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -15,7 +19,33 @@ public class InGameUIManager : MonoBehaviour
         Cowboy_1_Green_Lost.gameObject.SetActive(false);
         Cowboy_2_Blue_Lost.gameObject.SetActive(false);
         
+        Player1_Green_Touched.gameObject.SetActive(false);
+        Player2_Blue_Touched.gameObject.SetActive(false);
+        
         GameManager.Instance.OnGameWon += OnGameWon;
+        GameManager.Instance.OnBottleTouched += OnBottleTouched;
+    }
+
+    private void OnBottleTouched(Cowboy newOwner)
+    {
+        switch (newOwner)
+        {
+            case Cowboy.Cowboy1:
+                Player1_Green_Touched.gameObject.SetActive(true);
+                Player2_Blue_Touched.gameObject.SetActive(false);
+                break;
+            case Cowboy.Cowboy2:
+                Player1_Green_Touched.gameObject.SetActive(false);
+                Player2_Blue_Touched.gameObject.SetActive(true);
+                break;
+            
+            
+            default:
+            case Cowboy.None:
+                Player1_Green_Touched.gameObject.SetActive(false);
+                Player2_Blue_Touched.gameObject.SetActive(false);
+                break;
+        }
     }
 
     private void OnGameWon(Cowboy losingCowboy)
