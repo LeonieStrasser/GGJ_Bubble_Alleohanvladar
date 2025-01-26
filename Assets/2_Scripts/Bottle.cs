@@ -303,7 +303,7 @@ public class Bottle : MonoBehaviour
         Debug.Log($"Bottle exploded by pressure Value of {pressureMaxLimit}. BuildUp was {pressureBuiltUp}");
 
         //melde dem Gamemanager dass explosion passiert is
-        GameManager.Instance.CurrentGameState = GameManager.GameState.PostGame;
+        GameManager.Instance.ReportBottleExploded();
 
         GameObject newExplosion = Instantiate(explosionVFX.gameObject, explosionVFX.gameObject.transform.position, this.transform.rotation);
         newExplosion.GetComponent<VisualEffect>().Play();
