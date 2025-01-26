@@ -78,33 +78,11 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""730a4166-34d6-4967-9ebc-d64e5488ac61"",
-                    ""path"": ""<Mouse>/position"",
-                    ""interactions"": """",
-                    ""processors"": ""ScaleVector2(x=0.001,y=0.001)"",
-                    ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""Cowboy_1_Stick"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""c1f7a91b-d0fd-4a62-997e-7fb9b69bf235"",
                     ""path"": ""<Gamepad>/rightStick"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Gamepad"",
-                    ""action"": ""Cowboy_2_Stick"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""b557d992-ce8a-44b3-9400-6c3fe5852090"",
-                    ""path"": ""<Mouse>/position"",
-                    ""interactions"": """",
-                    ""processors"": ""ScaleVector2(x=0.001,y=0.001)"",
-                    ""groups"": "";Keyboard&Mouse"",
                     ""action"": ""Cowboy_2_Stick"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -133,17 +111,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""02cee0c9-c398-4d5c-b4b2-9552ce10c77f"",
-                    ""path"": ""<Mouse>/press"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""Cowboy_1_Toss"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""5f42710f-2839-4a44-a357-ec609df40937"",
                     ""path"": ""<Gamepad>/rightTrigger"",
                     ""interactions"": """",
@@ -160,17 +127,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Cowboy_2_Toss"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""713d5f57-cd68-4a4d-a218-aa3125817d2d"",
-                    ""path"": ""<Mouse>/press"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
                     ""action"": ""Cowboy_2_Toss"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
