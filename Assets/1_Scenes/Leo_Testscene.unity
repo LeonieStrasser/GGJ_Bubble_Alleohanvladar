@@ -431,6 +431,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1200295429528700864, guid: d211ec2eceb951f428e731c7fc7cbf7f, type: 3}
+      propertyPath: managedReferences[2873315856040591360].AnimateRotationTarget
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 2035858012615403485, guid: d211ec2eceb951f428e731c7fc7cbf7f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

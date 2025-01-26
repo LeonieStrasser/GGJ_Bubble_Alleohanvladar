@@ -1,5 +1,6 @@
 using System;
 using GGJ_Cowboys;
+using MoreMountains.Feedbacks;
 using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -56,6 +57,7 @@ public class Bottle : MonoBehaviour
     [SerializeField] Renderer bottleRenderer;
     bool blowOn;
     float blowStartValue;
+    [SerializeField] MMF_Player rotationFeedback;
 
     [HorizontalLine(color: EColor.Blue)]
     [Header("Throwing")]
@@ -188,6 +190,7 @@ public class Bottle : MonoBehaviour
     {
 
         UpdateOutBubbles();
+        UpdateBottleBlow();
         foreach (var feedbackMarker in feedbackMarker)
         {
             if (!feedbackMarker.triggered && CurrentBottlePressure >= feedbackMarker.triggerTime)
@@ -272,7 +275,7 @@ public class Bottle : MonoBehaviour
         pressureBuiltUp += PressurePerThrow;
 
         SoundCenter.Instance.PlayBottleToss();
-        
+
         GameManager.Instance.Flying = true;
     }
 
@@ -354,9 +357,16 @@ public class Bottle : MonoBehaviour
     {
         if (blowOn)
         {
-            float newValue = Remap(currentBottlePressure, blowStartValue, blowStartValue + 30, 0, 1);
+            float newValue = Remap(currentBottlePressure, blowStartValue, blowStartValue + 20, 0, 1);
             bottleRenderer.material.SetFloat("Intensity", newValue);
         }
+    }
+
+
+    public void RotationActive(bool active)
+    {
+        if (active) { rotationFeedback.PlayFeedbacks(); }
+        else { rotationFeedback.StopFeedbacks(); }
     }
 
     private void OnDestroy()
