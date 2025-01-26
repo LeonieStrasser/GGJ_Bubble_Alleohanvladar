@@ -10,14 +10,14 @@ public class Bottle : MonoBehaviour
 {
     [Header("Bottle Preasure")]
     [SerializeField, ReadOnly, BoxGroup("Debug")] bool BottleExploded = false;
-    
+
     [MinMaxSlider(0.0f, 100.0f)]
     public Vector2 maxPressureRange;
-    
+
     [SerializeField, ReadOnly, BoxGroup("Debug")] private float pressureMaxLimit;
     [SerializeField] float preasureIncreaseSpeedMultiplyer = .5f;
-    
-    [SerializeField, ReadOnly, BoxGroup("Debug")] 
+
+    [SerializeField, ReadOnly, BoxGroup("Debug")]
     private float currentBottlePressure;
     float CurrentBottlePressure
     {
@@ -25,7 +25,7 @@ public class Bottle : MonoBehaviour
         set
         {
             currentBottlePressure = value;
-            if(!BottleExploded)
+            if (!BottleExploded)
                 OnPreasureChange();
         }
     }
@@ -40,16 +40,22 @@ public class Bottle : MonoBehaviour
 
     [SerializeField]
     private float pressureConversionRate = 10;
-    
+
     [SerializeField]
     private float PressurePerThrow = 15;
-    
+
     [HorizontalLine(color: EColor.Blue)]
     [Header("Preasure Feedback")]
     [SerializeField] BottleFeedbackTrigger[] feedbackMarker;
     [SerializeField] VisualEffect bubbleEffect1;
     [SerializeField] VisualEffect bubbleEffect2;
     [SerializeField] VisualEffect explosionVFX;
+    [SerializeField] VisualEffect OutBubbles;
+    bool outBubblesOn;
+    float outBubbleStartValue;
+    [SerializeField] Renderer bottleRenderer;
+    bool blowOn;
+    float blowStartValue;
 
     [HorizontalLine(color: EColor.Blue)]
     [Header("Throwing")]
@@ -65,7 +71,7 @@ public class Bottle : MonoBehaviour
     private Vector3 currentStartPosition;
     private Vector3 currentTargetPosition;
 
-    
+
     public Camera
         bottleCam_P1_to_P2;
 
@@ -74,19 +80,19 @@ public class Bottle : MonoBehaviour
     {
         bottleCam_P1_to_P2.gameObject.SetActive(true);
     }
-    
+
     public void DeactivateBottleCam()
     {
         bottleCam_P1_to_P2.gameObject.SetActive(false);
     }
-    
-    
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         DeactivateBottleCam();
     }
-    
+
 
     public void SetStartPosition()
     {
@@ -118,8 +124,8 @@ public class Bottle : MonoBehaviour
     private void Update()
     {
         //do nothing if bottle already blew up
-        if(BottleExploded) return;
-        
+        if (BottleExploded) return;
+
         if (GameManager.Instance.Flying)
         {
             UpdateBottleFlyPosition();
@@ -174,12 +180,14 @@ public class Bottle : MonoBehaviour
         pressureBuiltUp = Mathf.Clamp(pressureBuiltUp - pressureConversion, 0, Single.MaxValue);
 
         float pressureChange = oldPressureBuiltUp - pressureBuiltUp;
-        
+
         CurrentBottlePressure += pressureChange;
     }
-    
+
     private void OnPreasureChange()
     {
+
+        UpdateOutBubbles();
         foreach (var feedbackMarker in feedbackMarker)
         {
             if (!feedbackMarker.triggered && CurrentBottlePressure >= feedbackMarker.triggerTime)
@@ -191,9 +199,9 @@ public class Bottle : MonoBehaviour
                 Debug.Log("Bottle FEEDBACK was triggered at Preasure Value " + feedbackMarker.triggerTime);
             }
         }
-        
+
         //check for explosion
-        if(CurrentBottlePressure > pressureMaxLimit)
+        if (CurrentBottlePressure > pressureMaxLimit)
             BottleExploding();
 
     }
@@ -210,11 +218,12 @@ public class Bottle : MonoBehaviour
             // Bottle exploading
             if (currentBottlePressure >= pressureMaxLimit)
             {
-                
-                
+
+
             }
             return true;
-        }else {return false; }
+        }
+        else { return false; }
     }
 
     [Button]
@@ -225,8 +234,8 @@ public class Bottle : MonoBehaviour
 
     void UpdateBubbleVFX()
     {
-        bubbleEffect1.SetFloat("Intensity", CurrentBottlePressure/100);
-        bubbleEffect2.SetFloat("Intensity", CurrentBottlePressure/100);
+        bubbleEffect1.SetFloat("Intensity", CurrentBottlePressure / 100);
+        bubbleEffect2.SetFloat("Intensity", CurrentBottlePressure / 100);
     }
 
 
@@ -257,7 +266,7 @@ public class Bottle : MonoBehaviour
         {
             Debug.LogWarning("ThrowCowboy hat die falsche ID!!!");
         }
-        
+
         transform.rotation = Quaternion.Euler(Vector3.zero);
 
         pressureBuiltUp += PressurePerThrow;
@@ -317,6 +326,39 @@ public class Bottle : MonoBehaviour
 
     #endregion
 
+
+    public void StartOutBubbles()
+    {
+        OutBubbles.Play();
+        outBubbleStartValue = CurrentBottlePressure;
+        OutBubbles.SetFloat("Intensity", 0);
+        outBubblesOn = true;
+    }
+    void UpdateOutBubbles()
+    {
+        if (outBubblesOn)
+        {
+
+            float newValue = Remap(CurrentBottlePressure, outBubbleStartValue, 100, 0, 1);
+            OutBubbles.SetFloat("Intensity", newValue);
+        }
+    }
+
+    public void StartGrow()
+    {
+        blowOn = true;
+        blowStartValue = CurrentBottlePressure;
+        bottleRenderer.material.SetFloat("Intensity", 0);
+    }
+    void UpdateBottleBlow()
+    {
+        if (blowOn)
+        {
+            float newValue = Remap(currentBottlePressure, blowStartValue, blowStartValue + 30, 0, 1);
+            bottleRenderer.material.SetFloat("Intensity", newValue);
+        }
+    }
+
     private void OnDestroy()
     {
         //GameManager.Instance.Cowboy1.OnShake -= OnShake;
@@ -324,9 +366,14 @@ public class Bottle : MonoBehaviour
         GameManager.Instance.Bottle = null;
     }
 
+
+    public static float Remap(float value, float fromMin, float fromMax, float toMin, float toMax)
+    {
+        return (value - fromMin) / (fromMax - fromMin) * (toMax - toMin) + toMin;
+    }
     void OnGUI()
     {
         GUI.Box(new Rect(Screen.width - 200, Screen.height - 300 - pressureBuiltUp * 3, 100, pressureBuiltUp * 3), $"PBU: {pressureBuiltUp}");
-        GUI.Box(new Rect(Screen.width -350,Screen.height - 300 -CurrentBottlePressure * 3, 100, CurrentBottlePressure * 3), $"CBP: {CurrentBottlePressure}");
+        GUI.Box(new Rect(Screen.width - 350, Screen.height - 300 - CurrentBottlePressure * 3, 100, CurrentBottlePressure * 3), $"CBP: {CurrentBottlePressure}");
     }
 }
