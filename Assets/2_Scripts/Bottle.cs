@@ -52,6 +52,7 @@ public class Bottle : MonoBehaviour
     [SerializeField] VisualEffect bubbleEffect2;
     [SerializeField] VisualEffect explosionVFX;
     [SerializeField] VisualEffect OutBubbles;
+    [SerializeField] VisualEffect ThrowVFX;
     bool outBubblesOn;
     float outBubbleStartValue;
     [SerializeField] Renderer bottleRenderer;
@@ -370,6 +371,11 @@ public class Bottle : MonoBehaviour
     {
         if (active) { rotationFeedback.PlayFeedbacks(); }
         else { rotationFeedback.StopFeedbacks(); }
+    }
+
+    public void PlayShakeVFX()
+    {
+        ThrowVFX.Play();
     }
 
     private void OnDestroy()
