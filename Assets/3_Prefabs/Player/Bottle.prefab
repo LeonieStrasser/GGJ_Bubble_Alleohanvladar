@@ -412,7 +412,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BottleExploded: 0
-  maxPressureRange: {x: 65.15151, y: 100}
+  maxPressureRange: {x: 55.506844, y: 100}
   pressureMaxLimit: 0
   preasureIncreaseSpeedMultiplyer: 0.5
   currentBottlePressure: 0
