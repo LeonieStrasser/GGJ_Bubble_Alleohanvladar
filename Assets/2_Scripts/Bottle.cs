@@ -261,6 +261,8 @@ public class Bottle : MonoBehaviour
         transform.rotation = Quaternion.Euler(Vector3.zero);
 
         pressureBuiltUp += PressurePerThrow;
+
+        SoundCenter.Instance.PlayBottleToss();
         
         GameManager.Instance.Flying = true;
     }
@@ -290,6 +292,7 @@ public class Bottle : MonoBehaviour
             GameManager.Instance.Flying = false;
             flyTimer = 0;
             transform.position = currentTargetPosition;
+            SoundCenter.Instance.PlayBottleCatch();
             GameManager.Instance.ReportBottleLanded();
         }
     }
@@ -304,6 +307,7 @@ public class Bottle : MonoBehaviour
 
         //melde dem Gamemanager dass explosion passiert is
         GameManager.Instance.ReportBottleExploded();
+        SoundCenter.Instance.PlayBottleExplosion();
 
         GameObject newExplosion = Instantiate(explosionVFX.gameObject, explosionVFX.gameObject.transform.position, this.transform.rotation);
         newExplosion.GetComponent<VisualEffect>().Play();

@@ -140,10 +140,14 @@ public class CowboyController : MonoBehaviour
         float deltaVelocityChange = Mathf.Abs(StickVelocity - lastStickVelocity);
         GameManager.Instance.Bottle.AddPressureBuiltUp(deltaVelocityChange * VelocityChangeToPressureBuiltUpFactor);
         
-        if (Mathf.Abs(lastStickValue.y) < 0.75f && Mathf.Abs(StickValue.y) > 0.75f)
+        if (Mathf.Abs(lastStickValue.magnitude) < 0.75f && Mathf.Abs(StickValue.magnitude) > 0.75f)
         {
-            OnShake?.Invoke(GGJ_Cowboys.Shake.Small);
-            Debug.Log($"{name}'s stick is at {StickValue} @ Frame {Time.frameCount}");
+            if(StickVelocity > 50)
+                SoundCenter.Instance.PlayBottleShake(GGJ_Cowboys.Shake.Big);
+            else if (StickVelocity > 25)
+                SoundCenter.Instance.PlayBottleShake(GGJ_Cowboys.Shake.Medium);
+            else if (StickVelocity > 10)
+                SoundCenter.Instance.PlayBottleShake(GGJ_Cowboys.Shake.Small);
         }
     }
 
