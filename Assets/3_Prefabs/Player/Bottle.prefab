@@ -457,7 +457,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
   - triggerTime: 0
-    triggerRange: {x: 1.913084, y: 6.314749}
+    triggerRange: {x: 40.07393, y: 70.27481}
     triggered: 0
     feedbackEvent:
       m_PersistentCalls:
@@ -479,6 +479,7 @@ MonoBehaviour:
   explosionVFX: {fileID: 651530159460432368}
   OutBubbles: {fileID: 7673181073680246975}
   bottleRenderer: {fileID: 2737957062988287369}
+  rotationFeedback: {fileID: 0}
   flyingTime: 3.3
   position1: {fileID: 0}
   position2: {fileID: 0}

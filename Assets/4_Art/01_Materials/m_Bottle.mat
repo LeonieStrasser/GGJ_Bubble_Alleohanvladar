@@ -130,7 +130,7 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     - _blowSharpness: 0.85
-    - _thickness: 0.08
+    - _thickness: 0.05
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 0, g: 0.30980393, b: 0.15686275, a: 0}
