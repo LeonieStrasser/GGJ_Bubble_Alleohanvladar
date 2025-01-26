@@ -41,6 +41,9 @@ public class Bottle : MonoBehaviour
     [SerializeField]
     private float pressureConversionRate = 10;
     
+    [SerializeField]
+    private float PressurePerThrow = 15;
+    
     [HorizontalLine(color: EColor.Blue)]
     [Header("Preasure Feedback")]
     [SerializeField] BottleFeedbackTrigger[] feedbackMarker;
@@ -257,6 +260,8 @@ public class Bottle : MonoBehaviour
         
         transform.rotation = Quaternion.Euler(Vector3.zero);
 
+        pressureBuiltUp += PressurePerThrow;
+        
         GameManager.Instance.Flying = true;
     }
 
@@ -298,7 +303,7 @@ public class Bottle : MonoBehaviour
         Debug.Log($"Bottle exploded by pressure Value of {pressureMaxLimit}. BuildUp was {pressureBuiltUp}");
 
         //melde dem Gamemanager dass explosion passiert is
-        GameManager.Instance.CurrentGameState = GameManager.GameState.PostGame;
+        GameManager.Instance.ReportBottleExploded();
 
         GameObject newExplosion = Instantiate(explosionVFX.gameObject, explosionVFX.gameObject.transform.position, this.transform.rotation);
         newExplosion.GetComponent<VisualEffect>().Play();

@@ -412,12 +412,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BottleExploded: 0
-  maxPressureRange: {x: 55.506844, y: 100}
+  maxPressureRange: {x: 53, y: 81}
   pressureMaxLimit: 0
-  preasureIncreaseSpeedMultiplyer: 0.5
+  preasureIncreaseSpeedMultiplyer: 5
   currentBottlePressure: 0
   pressureBuiltUp: 0
-  pressureConversionRate: 25
+  pressureConversionRate: 120
+  PressurePerThrow: 4
   feedbackMarker:
   - triggerTime: 0
     triggerRange: {x: 16.723679, y: 57.01255}
@@ -494,7 +495,7 @@ MonoBehaviour:
   bubbleEffect1: {fileID: 6326574639632542570}
   bubbleEffect2: {fileID: 4442123513834593579}
   explosionVFX: {fileID: 651530159460432368}
-  flyingTime: 1
+  flyingTime: 3.3
   position1: {fileID: 0}
   position2: {fileID: 0}
   yOffsetCurve:
@@ -530,8 +531,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  hightMultiplyer: 2
-  SpeedCurveMultiplyer: 2
+  hightMultiplyer: 2.1
+  SpeedCurveMultiplyer: 2.4
   bottleCam_P1_to_P2: {fileID: 1248525062655679679}
 --- !u!1 &4661800559814825336
 GameObject:
@@ -845,7 +846,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.3182, y: 1.3182, z: 1.3182}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5947210295769353925}

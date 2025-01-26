@@ -83,6 +83,9 @@ public class GameManager : MonoBehaviour
                 CameraManager.Instance.LookAtBottle();
         }
     }
+
+
+    public Action<Cowboy> OnGameWon, OnBottleTouched;
     
     //######################################################################################
     //#######################   Awake, Start and other set-up stuff  #######################
@@ -212,8 +215,9 @@ public class GameManager : MonoBehaviour
                 break;
             
             case GameState.PostGame:
+                //this triggers the ingame ui manager who then reports back to the game manager after playing its effects
+                OnGameWon?.Invoke(ActiveCowboy);
                 ActiveCowboy = Cowboy.None;
-                StartCoroutine(PostGamePlaceholder());
                 break;
         }
     }
@@ -232,12 +236,7 @@ public class GameManager : MonoBehaviour
         Instance.CurrentGameState = GameState.InGame;
     }
     
-    private IEnumerator PostGamePlaceholder()
-    {
-        Debug.Log("Entered post game. here is space for animations and effects.");
-        yield return new WaitForSeconds(3);
-        SceneManager.LoadScene("01_MainMenu");
-    }
+    
 
     private void StartCowboyTurn(Cowboy newActiveCowboy)
     {
@@ -280,6 +279,18 @@ public class GameManager : MonoBehaviour
                 ActiveCowboy = Cowboy.Cowboy1;
                 break;
         }
+        
+        OnBottleTouched?.Invoke(ActiveCowboy);
+    }
+
+    public void ReportBottleExploded()
+    {
+        Instance.CurrentGameState = GameState.PostGame;
+    }
+
+    public void ReturnToMenu()
+    {
+        SceneManager.LoadScene("01_MainMenu");
     }
     
     

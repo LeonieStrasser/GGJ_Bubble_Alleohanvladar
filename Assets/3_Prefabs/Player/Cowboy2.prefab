@@ -8,6 +8,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 64810501171944788, guid: cc66730aece126c418ebd6fa8d878ee6, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 2537c7d890b38a34c9cfb46b1a1c7baa, type: 2}
+    - target: {fileID: 1830093421860438885, guid: cc66730aece126c418ebd6fa8d878ee6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2786605924033535490, guid: cc66730aece126c418ebd6fa8d878ee6, type: 3}
       propertyPath: m_LocalScale.x
       value: -1
@@ -56,6 +64,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4640976709210143248, guid: cc66730aece126c418ebd6fa8d878ee6, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 2537c7d890b38a34c9cfb46b1a1c7baa, type: 2}
+    - target: {fileID: 4640976709210143248, guid: cc66730aece126c418ebd6fa8d878ee6, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 6e6a665a24cd9ad4baee5aab772598d7, type: 2}
     - target: {fileID: 7254285910195703690, guid: cc66730aece126c418ebd6fa8d878ee6, type: 3}
       propertyPath: m_Name
       value: Cowboy2
