@@ -52,6 +52,7 @@ public class Bottle : MonoBehaviour
     [SerializeField] VisualEffect bubbleEffect2;
     [SerializeField] VisualEffect explosionVFX;
     [SerializeField] VisualEffect OutBubbles;
+    [SerializeField] VisualEffect ThrowVFX;
     bool outBubblesOn;
     float outBubbleStartValue;
     [SerializeField] Renderer bottleRenderer;
@@ -354,14 +355,14 @@ public class Bottle : MonoBehaviour
     {
         blowOn = true;
         blowStartValue = CurrentBottlePressure;
-        bottleRenderer.material.SetFloat("Intensity", 0);
+        bottleRenderer.material.SetFloat("_Intensity", 0);
     }
     void UpdateBottleBlow()
     {
         if (blowOn)
         {
             float newValue = Remap(currentBottlePressure, blowStartValue, blowStartValue + 20, 0, 1);
-            bottleRenderer.material.SetFloat("Intensity", newValue);
+            bottleRenderer.material.SetFloat("_Intensity", newValue);
         }
     }
 
@@ -370,6 +371,11 @@ public class Bottle : MonoBehaviour
     {
         if (active) { rotationFeedback.PlayFeedbacks(); }
         else { rotationFeedback.StopFeedbacks(); }
+    }
+
+    public void PlayShakeVFX()
+    {
+        ThrowVFX.Play();
     }
 
     private void OnDestroy()
