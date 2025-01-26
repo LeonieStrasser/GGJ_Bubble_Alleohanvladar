@@ -274,6 +274,8 @@ public class Bottle : MonoBehaviour
 
         pressureBuiltUp += PressurePerThrow;
 
+        RotationActive(true);
+
         SoundCenter.Instance.PlayBottleToss();
 
         GameManager.Instance.Flying = true;
@@ -303,6 +305,7 @@ public class Bottle : MonoBehaviour
         {
             GameManager.Instance.Flying = false;
             flyTimer = 0;
+            RotationActive(false);
             transform.position = currentTargetPosition;
             SoundCenter.Instance.PlayBottleCatch();
             GameManager.Instance.ReportBottleLanded();

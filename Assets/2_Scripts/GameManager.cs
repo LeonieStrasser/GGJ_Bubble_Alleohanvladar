@@ -78,9 +78,17 @@ public class GameManager : MonoBehaviour
         get { return flying; }
         set
         {
-            flying = value; 
-            if(flying)
+            flying = value;
+            if (flying)
+            {
+                SoundCenter.Instance.StartBottleFlying();
                 CameraManager.Instance.LookAtBottle();
+            }
+            else
+            {
+                SoundCenter.Instance.StopBottleFlying();
+            }
+                
         }
     }
 

@@ -2,6 +2,7 @@ using System;
 using FMOD.Studio;
 using GGJ_Cowboys;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class SoundCenter : MonoBehaviour
 {
@@ -17,7 +18,8 @@ public class SoundCenter : MonoBehaviour
         menuMusicInstance,
         gameMusicInstance,
         UiClickInstance,
-        UiCancelInstance;
+        UiCancelInstance,
+        bottleSpinInstance;
 
     private void Awake()
     {
@@ -132,6 +134,28 @@ public class SoundCenter : MonoBehaviour
         UiCancelInstance = FMODUnity.RuntimeManager.CreateInstance("event:/UI/UI_Cancel");
         UiCancelInstance.start();
         UiCancelInstance.release();
+    }
+
+    public void StartBottleFlying()
+    {
+        int rnd = Random.Range(0, 2);
+        if (rnd == 0)
+        {
+            bottleSpinInstance = FMODUnity.RuntimeManager.CreateInstance("event:/Bottle_Spin/Bottle_Spin_Fast_Loop");
+        }
+        else
+        {
+            bottleSpinInstance = FMODUnity.RuntimeManager.CreateInstance("event:/Bottle_Spin/Bottle_Spin_Slow_Loop");
+        }
+        
+        
+        bottleSpinInstance.start();
+    }
+
+    public void StopBottleFlying()
+    {
+        bottleSpinInstance.stop(STOP_MODE.ALLOWFADEOUT);
+        bottleSpinInstance.release();
     }
     
 }
