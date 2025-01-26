@@ -59,6 +59,9 @@ public class SoundCenter : MonoBehaviour
                 bigShakeInstance.release();
                 break;
         }
+        
+        if(GameManager.Instance.Bottle)
+            GameManager.Instance.Bottle.PlayShakeVFX();
     }
 
     public void PlayBottleToss()
