@@ -74,6 +74,8 @@ public class InGameUIManager : MonoBehaviour
             case Cowboy.None:
                 throw new ArgumentOutOfRangeException(nameof(losingCowboy), losingCowboy, null);
         }
+
+        SoundCenter.Instance.PlayWinningSound();
         
         //wait for overlay
         yield return new WaitForSeconds(3);

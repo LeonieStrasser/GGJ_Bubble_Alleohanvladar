@@ -15,7 +15,9 @@ public class SoundCenter : MonoBehaviour
         bottleCatchInstance,
         bottleExplosionInstance,
         menuMusicInstance,
-        gameMusicInstance;
+        gameMusicInstance,
+        UiClickInstance,
+        UiCancelInstance;
 
     private void Awake()
     {
@@ -86,16 +88,50 @@ public class SoundCenter : MonoBehaviour
         menuMusicInstance = FMODUnity.RuntimeManager.CreateInstance("event:/Music/Menu_Music");
         menuMusicInstance.start();
 
-        gameMusicInstance.stop(STOP_MODE.ALLOWFADEOUT);
-        gameMusicInstance.release();
+        StopGameMusic();
+    }
+
+    public void StopMenuMusic()
+    {
+        menuMusicInstance.stop(STOP_MODE.ALLOWFADEOUT);
+        menuMusicInstance.release();
     }
     
     public void StartGameMusic()
     {
         gameMusicInstance = FMODUnity.RuntimeManager.CreateInstance("event:/Music/Game_Music");
         gameMusicInstance.start();
-        
-        menuMusicInstance.stop(STOP_MODE.ALLOWFADEOUT);
-        menuMusicInstance.release();
+
+        StopMenuMusic();
     }
+
+    public void StopGameMusic()
+    {
+        gameMusicInstance.stop(STOP_MODE.ALLOWFADEOUT);
+        gameMusicInstance.release();
+    }
+
+    public void PlayWinningSound()
+    {
+        StopGameMusic();
+        
+        bottleExplosionInstance = FMODUnity.RuntimeManager.CreateInstance("event:/Winning/Winning");
+        bottleExplosionInstance.start();
+        bottleExplosionInstance.release();
+    }
+
+    public void PlayUIClick()
+    {
+        UiClickInstance = FMODUnity.RuntimeManager.CreateInstance("event:/UI/UI_Click");
+        UiClickInstance.start();
+        UiClickInstance.release();
+    }
+    
+    public void PlayUICancel()
+    {
+        UiCancelInstance = FMODUnity.RuntimeManager.CreateInstance("event:/UI/UI_Cancel");
+        UiCancelInstance.start();
+        UiCancelInstance.release();
+    }
+    
 }

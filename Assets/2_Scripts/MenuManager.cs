@@ -18,6 +18,7 @@ public class MenuManager : MonoBehaviour
 
     public void LoadGame()
     {
+        SoundCenter.Instance.PlayUIClick();
         StartCoroutine(LoadGameAfterDelay());
     }
 
@@ -31,6 +32,7 @@ public class MenuManager : MonoBehaviour
 
     public void QuitGame()
     {
+        SoundCenter.Instance.PlayUICancel();
         Application.Quit();
     }
 }
