@@ -1,5 +1,421 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8288632670782466924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Music.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/SFX_banks/Desktop/Music.bank
+  Name: Music
+  StudioPath: bank:/Music
+  lastModified: 638734969523353827
+  FileSizes: []
+  Exists: 1
+--- !u!114 &-7485579882375967503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Bottle_Shake/Bottle_Shake_Fast_Loop_01
+  m_EditorClassIdentifier: 
+  Path: event:/Bottle_Shake/Bottle_Shake_Fast_Loop_01
+  Guid:
+    Data1: 1071866799
+    Data2: 1161924759
+    Data3: -1384714817
+    Data4: -323520360
+  Banks:
+  - {fileID: 2098532745078735404}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1157
+--- !u!114 &-6594194038563932485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/UI/UI
+  m_EditorClassIdentifier: 
+  Path: event:/UI/UI
+  Guid:
+    Data1: -738873182
+    Data2: 1214678671
+    Data3: 2053279878
+    Data4: -1764106417
+  Banks:
+  - {fileID: 8490929813288837580}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 506
+--- !u!114 &-6452371280326656363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Bottle_Shake/Bottle_Shake_Mid_Single
+  m_EditorClassIdentifier: 
+  Path: event:/Bottle_Shake/Bottle_Shake_Mid_Single
+  Guid:
+    Data1: 128171891
+    Data2: 1270915995
+    Data3: 917790381
+    Data4: -1705476580
+  Banks:
+  - {fileID: 2098532745078735404}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 369
+--- !u!114 &-6080768737886949830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Bottle_Shake/Bottle_Shake_Fast_Single
+  m_EditorClassIdentifier: 
+  Path: event:/Bottle_Shake/Bottle_Shake_Fast_Single
+  Guid:
+    Data1: -165651584
+    Data2: 1266741356
+    Data3: -941371751
+    Data4: -1026170559
+  Banks:
+  - {fileID: 2098532745078735404}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 157
+--- !u!114 &-6018242691648727892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Cowboy_Cloth_NoSheriff/Cowboy_Cloth_NoSheriff
+  m_EditorClassIdentifier: 
+  Path: event:/Cowboy_Cloth_NoSheriff/Cowboy_Cloth_NoSheriff
+  Guid:
+    Data1: -1982868578
+    Data2: 1141537776
+    Data3: 1399503261
+    Data4: 1502444723
+  Banks:
+  - {fileID: 2098532745078735404}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 878
+--- !u!114 &-5790808091551512995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/Music
+  m_EditorClassIdentifier: 
+  Path: event:/Music/Music
+  Guid:
+    Data1: -1199002591
+    Data2: 1243458226
+    Data3: 2046161574
+    Data4: -293577773
+  Banks:
+  - {fileID: -8288632670782466924}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 53465
+--- !u!114 &-5505502847776003149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Bottle_Shake/Bottle_Shake_Slow_Single
+  m_EditorClassIdentifier: 
+  Path: event:/Bottle_Shake/Bottle_Shake_Slow_Single
+  Guid:
+    Data1: 109442538
+    Data2: 1317445528
+    Data3: -2092528468
+    Data4: 1530093610
+  Banks:
+  - {fileID: 2098532745078735404}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 746
+--- !u!114 &-3395628531166583871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Hold_Bottle/Hold_Bottle
+  m_EditorClassIdentifier: 
+  Path: event:/Hold_Bottle/Hold_Bottle
+  Guid:
+    Data1: -49575483
+    Data2: 1132513133
+    Data3: -56315760
+    Data4: 1355015649
+  Banks:
+  - {fileID: 2098532745078735404}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 269
+--- !u!114 &-2724707520750361320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Beer_Throw/Beer_Throw_Slow
+  m_EditorClassIdentifier: 
+  Path: event:/Beer_Throw/Beer_Throw_Slow
+  Guid:
+    Data1: -210034050
+    Data2: 1199000718
+    Data3: -89490039
+    Data4: 557261121
+  Banks:
+  - {fileID: 2098532745078735404}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1019
+--- !u!114 &-2534669093295942035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.strings.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/SFX_banks/Desktop/Master.strings.bank
+  Name: Master.strings
+  StudioPath: bank:/Master.strings
+  lastModified: 638734969522728890
+  FileSizes:
+  - Name: 
+    Value: 2018
+  Exists: 1
+--- !u!114 &-2442834439456335509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Bottle_Spin/Bottle_Spin_Fast_Loop
+  m_EditorClassIdentifier: 
+  Path: event:/Bottle_Spin/Bottle_Spin_Fast_Loop
+  Guid:
+    Data1: 1428628351
+    Data2: 1314891918
+    Data3: 444609419
+    Data4: -904390590
+  Banks:
+  - {fileID: 2098532745078735404}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 6547
+--- !u!114 &-2383303072406919569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Stinger/Stinger
+  m_EditorClassIdentifier: 
+  Path: event:/Stinger/Stinger
+  Guid:
+    Data1: -904574276
+    Data2: 1102951938
+    Data3: 1561237121
+    Data4: 675953155
+  Banks:
+  - {fileID: 2098532745078735404}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 5705
+--- !u!114 &-2163900645681100660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/GameOver/GameOver
+  m_EditorClassIdentifier: 
+  Path: event:/GameOver/GameOver
+  Guid:
+    Data1: -1825159091
+    Data2: 1315122437
+    Data3: 2080084380
+    Data4: 488810682
+  Banks:
+  - {fileID: 2098532745078735404}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 4770
+--- !u!114 &-2144433492637857585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Bottle_Spin/Bottle_Spin_Slow_Loop
+  m_EditorClassIdentifier: 
+  Path: event:/Bottle_Spin/Bottle_Spin_Slow_Loop
+  Guid:
+    Data1: 1754890079
+    Data2: 1092909117
+    Data3: -2089170529
+    Data4: 1234897714
+  Banks:
+  - {fileID: 2098532745078735404}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1871
+--- !u!114 &-2057230709937965444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Bottle_Shake/Bottle_Shake_Fast_Loop_02
+  m_EditorClassIdentifier: 
+  Path: event:/Bottle_Shake/Bottle_Shake_Fast_Loop_02
+  Guid:
+    Data1: 1862543670
+    Data2: 1133661630
+    Data3: 97138582
+    Data4: -481442211
+  Banks:
+  - {fileID: 2098532745078735404}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1641
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12,10 +428,300 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d32cf7c32a3ed8347bac48ef5ed56d82, type: 3}
   m_Name: FMODStudioCache
   m_EditorClassIdentifier: 
-  EditorBanks: []
-  EditorEvents: []
+  EditorBanks:
+  - {fileID: -2534669093295942035}
+  - {fileID: 136389238279033416}
+  - {fileID: 2601930276740794633}
+  - {fileID: -8288632670782466924}
+  - {fileID: 2098532745078735404}
+  - {fileID: 8490929813288837580}
+  EditorEvents:
+  - {fileID: 3364853275385043167}
+  - {fileID: -5790808091551512995}
+  - {fileID: 395581234275854697}
+  - {fileID: 7612871059833239933}
+  - {fileID: -2057230709937965444}
+  - {fileID: -2163900645681100660}
+  - {fileID: 4349732042272412770}
+  - {fileID: -2144433492637857585}
+  - {fileID: -6452371280326656363}
+  - {fileID: -2724707520750361320}
+  - {fileID: -2442834439456335509}
+  - {fileID: -6080768737886949830}
+  - {fileID: 9158409216353790468}
+  - {fileID: -6018242691648727892}
+  - {fileID: -7485579882375967503}
+  - {fileID: -2383303072406919569}
+  - {fileID: -3395628531166583871}
+  - {fileID: 6070639818190429845}
+  - {fileID: 1979840925644693500}
+  - {fileID: -5505502847776003149}
+  - {fileID: -6594194038563932485}
   EditorParameters: []
-  MasterBanks: []
-  StringsBanks: []
-  cacheTime: 0
+  MasterBanks:
+  - {fileID: 2601930276740794633}
+  StringsBanks:
+  - {fileID: -2534669093295942035}
+  cacheTime: 638734969964246028
   cacheVersion: 131622
+--- !u!114 &136389238279033416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Ambiance.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/SFX_banks/Desktop/Ambiance.bank
+  Name: Ambiance
+  StudioPath: bank:/Ambiance
+  lastModified: 638734965534969894
+  FileSizes: []
+  Exists: 1
+--- !u!114 &395581234275854697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Beer_Fizz_Long/Beer_Fizz_Long
+  m_EditorClassIdentifier: 
+  Path: event:/Beer_Fizz_Long/Beer_Fizz_Long
+  Guid:
+    Data1: -1492124656
+    Data2: 1261534528
+    Data3: -1113323081
+    Data4: 1217886522
+  Banks:
+  - {fileID: 2098532745078735404}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 12814
+--- !u!114 &1979840925644693500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Bottle_Shake/Bottle_Shake_Fast_withEnd
+  m_EditorClassIdentifier: 
+  Path: event:/Bottle_Shake/Bottle_Shake_Fast_withEnd
+  Guid:
+    Data1: -2018410790
+    Data2: 1153833696
+    Data3: 1592756131
+    Data4: -561152186
+  Banks:
+  - {fileID: 2098532745078735404}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2164
+--- !u!114 &2098532745078735404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/SFX.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/SFX_banks/Desktop/SFX.bank
+  Name: SFX
+  StudioPath: bank:/SFX
+  lastModified: 638734969964246028
+  FileSizes: []
+  Exists: 1
+--- !u!114 &2601930276740794633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/SFX_banks/Desktop/Master.bank
+  Name: Master
+  StudioPath: bank:/Master
+  lastModified: 638734969522689058
+  FileSizes: []
+  Exists: 1
+--- !u!114 &3364853275385043167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Ambiance/Ambiance
+  m_EditorClassIdentifier: 
+  Path: event:/Ambiance/Ambiance
+  Guid:
+    Data1: -1170769309
+    Data2: 1205868541
+    Data3: -1212838209
+    Data4: -1481972451
+  Banks:
+  - {fileID: 136389238279033416}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 33819
+--- !u!114 &4349732042272412770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Explosion/Explosion
+  m_EditorClassIdentifier: 
+  Path: event:/Explosion/Explosion
+  Guid:
+    Data1: -1973850532
+    Data2: 1198785884
+    Data3: 503875750
+    Data4: -2047139840
+  Banks:
+  - {fileID: 2098532745078735404}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1386
+--- !u!114 &6070639818190429845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Beer_Throw/Beer_Throw_Fast
+  m_EditorClassIdentifier: 
+  Path: event:/Beer_Throw/Beer_Throw_Fast
+  Guid:
+    Data1: 999769555
+    Data2: 1080957406
+    Data3: -1577620851
+    Data4: 1120575674
+  Banks:
+  - {fileID: 2098532745078735404}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 3920
+--- !u!114 &7612871059833239933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Winning/Winning
+  m_EditorClassIdentifier: 
+  Path: event:/Winning/Winning
+  Guid:
+    Data1: 1246442779
+    Data2: 1327320064
+    Data3: -1031397203
+    Data4: -1526397118
+  Banks:
+  - {fileID: 2098532745078735404}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2493
+--- !u!114 &8490929813288837580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/UI.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/SFX_banks/Desktop/UI.bank
+  Name: UI
+  StudioPath: bank:/UI
+  lastModified: 638734963222066650
+  FileSizes: []
+  Exists: 1
+--- !u!114 &9158409216353790468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Cowboy_Cloth_WithSheriff/Cowboy_Cloth_WithSheriff
+  m_EditorClassIdentifier: 
+  Path: event:/Cowboy_Cloth_WithSheriff/Cowboy_Cloth_WithSheriff
+  Guid:
+    Data1: 611628958
+    Data2: 1277872239
+    Data3: 1630186116
+    Data4: 1258326745
+  Banks:
+  - {fileID: 2098532745078735404}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 878
